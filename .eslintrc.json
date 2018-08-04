@@ -1,5 +1,7 @@
 {
 	"extends": [
-		"standard"
+		"standard",
+		"plugin:import/errors",
+		"plugin:import/warnings"
 	]
 }

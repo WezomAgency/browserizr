@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm test && npm run rollup && npm run uglify",
-    "test": "npm run standard",
+    "build": "npm test && npm run rollup && npm run uglify && npm run eslint-dist",
+    "test": "npm run eslint",
     "rollup": "rollup -c",
     "uglify": "uglifyjs -cmo dist/browserizr.min.js -- dist/browserizr.js",
-    "standard": "standard \"./index.js\" --parser babel-eslint --fix"
+    "eslint": "eslint \"./index.js\" --fix --parser babel-eslint --parser-options \"ecmaVersion: 6\"",
+    "eslint-dist": "eslint \"./dist/browserizr.js\" --fix --rule \"no-unused-vars: 0\" --parser-options \"ecmaVersion: 5\""
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,15 @@
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-preset-env": "^1.7.0",
+    "eslint": "^5.3.0",
+    "eslint-config-standard": "^12.0.0-alpha.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "jest": "^23.4.2",
     "rollup": "^0.63.5",
     "rollup-plugin-babel": "^3.0.7",
-    "standard": "^11.0.1",
     "uglify-js": "^3.4.6"
   }
 }

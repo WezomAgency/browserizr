@@ -10,11 +10,17 @@
 // Private
 // ----------------------------------------
 
-// в этой части файла создаються и описываються
-// вспомогательные значения и методы, который будут использованы
-// внутри вашего основного кода, ради которого создан этот файл
-// Также слово приватный - обозначает что эти значения и методы
-// не будут доступны за пределами этого файла
+/**
+ * @type {Object}
+ * @private
+ */
+const _tests = {
+  chrome (userAgent, platform) {
+    var chrome = !!window.chrome && userAgent.match(/Opera|OPR\//i) === null
+    var edge = / edge\//i.test(userAgent)
+    return chrome && !edge
+  }
+}
 
 // ----------------------------------------
 // Public
@@ -24,8 +30,27 @@
  * @namespace
  */
 const Browserizr = {
-  is () {
-    console.log(1)
+  /**
+   * @type {string}
+   */
+  userAgent: window.navigator.userAgent,
+
+  /**
+   * @type {string}
+   */
+  platform: window.navigator.platform,
+
+  /**
+   *
+   * @param {string} test
+   * @return {boolean|null} - null if test not specified
+   */
+  is (test) {
+    if (_tests.hasOwnProperty(test)) {
+      return _tests[test](this.userAgent, this.platform)
+    }
+    console.warn('Browserizr WARN! No test with name "' + test + '"')
+    return null
   }
 }
 
