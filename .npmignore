@@ -21,7 +21,7 @@ thumbs.db
 /.cache
 
 # NPM Publish
-index.php
+index.html
 /assets/
 /tests/
 .eslintrc.json

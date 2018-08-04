@@ -3,5 +3,12 @@
     "standard",
     "plugin:import/errors",
     "plugin:import/warnings"
-  ]
+  ],
+  "env": {
+    "browser": true,
+    "node": false
+  },
+  "rules": {
+    "node/no-deprecated-api": 0
+  }
 }
