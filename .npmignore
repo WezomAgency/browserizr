@@ -22,4 +22,7 @@ thumbs.db
 
 # NPM Publish
 index.php
-assets/
+/assets/
+/tests/
+rollup.config.js
+.eslintrc.json

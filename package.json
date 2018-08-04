@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm test && npm run rollup && npm run uglify",
+    "test": "npm run standard",
+    "rollup": "rollup -c",
+    "uglify": "uglifyjs -cmo dist/browserizr.min.js -- dist/browserizr.js",
+    "standard": "standard \"./index.js\" --parser babel-eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/WezomAgency/browserizr/issues"
   },
-  "homepage": "https://github.com/WezomAgency/browserizr#readme"
+  "homepage": "https://github.com/WezomAgency/browserizr#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.4.2",
+    "rollup": "^0.63.5",
+    "rollup-plugin-babel": "^3.0.7",
+    "standard": "^11.0.1",
+    "uglify-js": "^3.4.6"
+  }
 }
