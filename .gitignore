@@ -1,0 +1,21 @@
+# IDE
+*.iml
+.idea/
+/nbproject/
+/out/
+.idea_modules/
+.phpstorm.meta.php
+_ide_helper.php
+atlassian-ide-plugin.xml
+
+# Nodejs
+.npm/
+node_modules/
+*.log*
+
+# fs
+.DS_Store
+thumbs.db
+
+# WIP
+/.cache
