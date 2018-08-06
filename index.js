@@ -239,7 +239,7 @@ const Browserizr = {
   },
 
   /**
-   * @return {Array}
+   * @return {string[]} - array of all positive detects
    */
   check () {
     let results = []

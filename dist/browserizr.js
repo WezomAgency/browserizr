@@ -226,7 +226,7 @@ var Browserizr = (function () {
     },
 
     /**
-     * @return {Array}
+     * @return {string[]} - array of all positive detects
      */
     check: function check () {
       var results = []
