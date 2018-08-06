@@ -86,50 +86,50 @@ in js file -> Browserizr.addClasses(['ie', 'ie11'])
 
 Browserizr has detects test for:
 
-- `android`
-- `android3`
-- `android4`
-- `android5`
-- `android6`
-- `android7`
-- `android8`
-- `blink`
-- `chrome`
-- `edge`
-- `edge-android`
-- `edge-ios`
-- `ie`
-- `ie8`
-- `ie9`
-- `ie10`
-- `ie11`
-- `ios`
-- `ipad`
-- `ipod`
-- `iphone`
-- `iphone4`
-- `iphone5`
-- `iphone678` - iPhone 6/7/8
-- `iphone678plus` - iPhone 6/7/8 plus
-- `iphonex`
-- `linux` - based on platform test
-- `mac` - based on platform test
-- `maclike`
-- `meizu-phone`
-- `meizunote-phone`
-- `moz`
-- `opera`
-- `redmi-phone`
-- `redminote-phone`
-- `safari`
-- `webkit`
-- `windows` - based on platform test
-- `windows-xp`
-- `windows-vista`
-- `windows7`
-- `windows8`
-- `windows10`
-- `windows-phone`
+1. `android`
+1. `android3`
+1. `android4`
+1. `android5`
+1. `android6`
+1. `android7`
+1. `android8`
+1. `blink`
+1. `chrome`
+1. `edge`
+1. `edge-android`
+1. `edge-ios`
+1. `ie`
+1. `ie8`
+1. `ie9`
+1. `ie10`
+1. `ie11`
+1. `ios`
+1. `ipad`
+1. `ipod`
+1. `iphone`
+1. `iphone4`
+1. `iphone5`
+1. `iphone678` - iPhone 6/7/8
+1. `iphone678plus` - iPhone 6/7/8 plus
+1. `iphonex`
+1. `linux` - based on platform test
+1. `mac` - based on platform test
+1. `maclike`
+1. `meizu-phone`
+1. `meizunote-phone`
+1. `moz`
+1. `opera`
+1. `redmi-phone`
+1. `redminote-phone`
+1. `safari`
+1. `webkit`
+1. `windows` - based on platform test
+1. `windows-xp`
+1. `windows-vista`
+1. `windows7`
+1. `windows8`
+1. `windows10`
+1. `windows-phone`
 
 ---
 
