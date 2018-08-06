@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 0.0.1
+ * @version 0.0.2
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  */
 
