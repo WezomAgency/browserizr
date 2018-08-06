@@ -55,11 +55,11 @@ var Browserizr = (function () {
       return (/ edge\//i.test(ua)
       )
     },
-    edgeandroid: function edgeandroid (ua) {
+    'edge-android': function edgeAndroid (ua) {
       return (/\sEdgA\//i.test(ua)
       )
     },
-    edgeios: function edgeios (ua) {
+    'edge-ios': function edgeIos (ua) {
       return (/\sEdgiOS\//i.test(ua)
       )
     },
@@ -82,24 +82,39 @@ var Browserizr = (function () {
     ios: function ios (ua) {
       return this.ipad(ua) || this.ipod(ua) || this.iphone(ua)
     },
-    ipad: function ipad (ua, platform) {
-      return (/iPad/.test(platform)
+    ipad: function ipad (ua) {
+      return (/iPad/i.test(ua)
       )
     },
-    ipod: function ipod (ua, platform) {
-      return (/iPod/.test(platform)
+    ipod: function ipod (ua) {
+      return (/iPod/i.test(ua)
       )
     },
-    iphone: function iphone (ua, platform) {
-      return (/iPhone/.test(platform)
+    iphone: function iphone (ua) {
+      return (/iPhone/i.test(ua)
       )
+    },
+    iphone4: function iphone4 (ua) {
+      return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 480
+    },
+    iphone5: function iphone5 (ua) {
+      return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 568
+    },
+    iphone678: function iphone678 (ua) {
+      return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 667
+    },
+    iphone678plus: function iphone678plus (ua) {
+      return this.iphone(ua) && this.wh.width === 414 && this.wh.height === 736
+    },
+    iphonex: function iphonex (ua) {
+      return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
     },
     mac: function mac (ua, platform) {
       return (/Mac/.test(platform)
       )
     },
     maclike: function maclike (ua, platform) {
-      return this.mac(ua, platform) || this.ios(ua, platform)
+      return this.mac(ua, platform) || this.ios(ua)
     },
     'meizu-phone': function meizuPhone (ua) {
       return (/Android\s.*MZ(-)?/i.test(ua)
@@ -122,8 +137,60 @@ var Browserizr = (function () {
     'redminote-phone': function redminotePhone (ua) {
       return (/Android\s.*Redmi.*\sNote\s/i.test(ua)
       )
+    },
+    safari: function safari (ua) {
+      return (/^((?!chrome|android).)*safari/i.test(ua)
+      )
+    },
+    webkit: function webkit (ua) {
+      return !!('WebkitAppearance' in document.documentElement.style && !this.edge(ua))
+    },
+    windows: function windows (ua, platform) {
+      return (/^win/i.test(platform)
+      )
+    },
+    'windows-xp': function windowsXp (ua) {
+      return (/windows nt 5\.1/i.test(ua)
+      )
+    },
+    'windows-vista': function windowsVista (ua) {
+      return (/windows nt 6\.0/i.test(ua)
+      )
+    },
+    windows7: function windows7 (ua) {
+      return (/windows nt 6\.1/i.test(ua)
+      )
+    },
+    windows8: function windows8 (ua) {
+      return (/windows nt 6\.[2|3]/i.test(ua)
+      )
+    },
+    windows10: function windows10 (ua) {
+      return (/windows nt 10/i.test(ua)
+      )
+    },
+    'windows-phone': function windowsPhone (ua) {
+      return (/Windows\sPhone/i.test(ua)
+      )
     }
   }
+
+  var width = window.screen.width
+  var height = window.screen.height
+  if (width > height) {
+    var tmp = height
+    height = width
+    width = tmp
+  }
+
+  Object.defineProperty(_tests, 'wh', {
+    value: { width: width, height: height },
+    writable: false,
+    configurable: false,
+    enumerable: false
+  })
+
+  console.log(_tests)
 
   // ----------------------------------------
   // Public
@@ -154,6 +221,19 @@ var Browserizr = (function () {
       }
       console.warn('Browserizr WARN! No test with name "' + test + '"')
       return null
+    },
+
+    /**
+     * @return {Array}
+     */
+    check: function check () {
+      var results = []
+      for (var key in _tests) {
+        if (this.is(key)) {
+          results.push(key)
+        }
+      }
+      return results
     },
 
     /**

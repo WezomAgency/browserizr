@@ -55,11 +55,11 @@ const _tests = {
     return / edge\//i.test(ua)
   },
 
-  edgeandroid (ua) {
+  'edge-android' (ua) {
     return /\sEdgA\//i.test(ua)
   },
 
-  edgeios (ua) {
+  'edge-ios' (ua) {
     return /\sEdgiOS\//i.test(ua)
   },
 
@@ -87,16 +87,36 @@ const _tests = {
     return this.ipad(ua) || this.ipod(ua) || this.iphone(ua)
   },
 
-  ipad (ua, platform) {
-    return /iPad/.test(platform)
+  ipad (ua) {
+    return /iPad/i.test(ua)
   },
 
-  ipod (ua, platform) {
-    return /iPod/.test(platform)
+  ipod (ua) {
+    return /iPod/i.test(ua)
   },
 
-  iphone (ua, platform) {
-    return /iPhone/.test(platform)
+  iphone (ua) {
+    return /iPhone/i.test(ua)
+  },
+
+  iphone4 (ua) {
+    return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 480
+  },
+
+  iphone5 (ua) {
+    return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 568
+  },
+
+  iphone678 (ua) {
+    return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 667
+  },
+
+  iphone678plus (ua) {
+    return this.iphone(ua) && this.wh.width === 414 && this.wh.height === 736
+  },
+
+  iphonex (ua) {
+    return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
   },
 
   mac (ua, platform) {
@@ -104,7 +124,7 @@ const _tests = {
   },
 
   maclike (ua, platform) {
-    return this.mac(ua, platform) || this.ios(ua, platform)
+    return this.mac(ua, platform) || this.ios(ua)
   },
 
   'meizu-phone' (ua) {
@@ -129,8 +149,59 @@ const _tests = {
 
   'redminote-phone' (ua) {
     return /Android\s.*Redmi.*\sNote\s/i.test(ua)
+  },
+
+  safari (ua) {
+    return /^((?!chrome|android).)*safari/i.test(ua)
+  },
+
+  webkit (ua) {
+    return !!('WebkitAppearance' in document.documentElement.style && !this.edge(ua))
+  },
+
+  windows (ua, platform) {
+    return /^win/i.test(platform)
+  },
+
+  'windows-xp' (ua) {
+    return /windows nt 5\.1/i.test(ua)
+  },
+
+  'windows-vista' (ua) {
+    return /windows nt 6\.0/i.test(ua)
+  },
+
+  windows7 (ua) {
+    return /windows nt 6\.1/i.test(ua)
+  },
+
+  windows8 (ua) {
+    return /windows nt 6\.[2|3]/i.test(ua)
+  },
+
+  windows10 (ua) {
+    return /windows nt 10/i.test(ua)
+  },
+
+  'windows-phone' (ua) {
+    return /Windows\sPhone/i.test(ua)
   }
 }
+
+let width = window.screen.width
+let height = window.screen.height
+if (width > height) {
+  let tmp = height
+  height = width
+  width = tmp
+}
+
+Object.defineProperty(_tests, 'wh', {
+  value: {width, height},
+  writable: false,
+  configurable: false,
+  enumerable: false
+})
 
 // ----------------------------------------
 // Public
@@ -161,6 +232,19 @@ const Browserizr = {
     }
     console.warn('Browserizr WARN! No test with name "' + test + '"')
     return null
+  },
+
+  /**
+   * @return {Array}
+   */
+  check () {
+    let results = []
+    for (let key in _tests) {
+      if (this.is(key)) {
+        results.push(key)
+      }
+    }
+    return results
   },
 
   /**

@@ -7,16 +7,36 @@
     <title>Browserizr</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/css/bootstrap-custom.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container my-4">
 		<h1>Browserizr</h1>
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+		<div class="alert alert-info">
+			<h3>Browserizr checked your browser and find that it is:</h3>
+			<ul id="browserizr-check">
+				<li><code class="show-code">... processing</code></li>
+			</ul>
+			<h4>userAgent</h4>
+			<p><code class="show-code" id="browserizr-userAgent">...</code></p>
+			<h4>platform</h4>
+			<p><code class="show-code" id="browserizr-platform">...</code></p>
+		</div>
 	</div>
 
 	<script src="./dist/browserizr.js"></script>
 	<script>
-		Browserizr.addClasses(["android", "android3", "android4", "android5", "android6", "android7", "android8", "blink", "chrome", "edge", "edgeandroid", "edgeios", "ie", "ie8", "ie9", "ie10", "ie11", "ios", "ipad", "ipod", "iphone", "mac", "maclike", "meizu-phone", "meizunote-phone", "moz", "opera", "redmi-phone", "redminote-phone"])
+		document.addEventListener('DOMContentLoaded', function () {
+		  var check = window.Browserizr.check();
+		  var checkResults = check.map(function (name) {
+		    return '<li><code class="show-code">' + name + '</code></li>';
+		  }).join('\n');
+		  document.getElementById('browserizr-check').innerHTML = checkResults;
+		  document.getElementById('browserizr-userAgent').innerHTML = window.Browserizr.userAgent;
+		  document.getElementById('browserizr-platform').innerHTML = window.Browserizr.platform;
+		});
 	</script>
 </body>
 </html>
