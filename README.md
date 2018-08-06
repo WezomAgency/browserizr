@@ -9,6 +9,12 @@
 
 ---
 
+## Demo
+
+https://wezomagency.github.io/browserizr/
+
+---
+
 ## Install
 
 ### NPM
