@@ -51,15 +51,17 @@
 
 	<script src="./dist/browserizr.js"></script>
 	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-		  var check = window.Browserizr.check();
-		  var checkResults = check.map(function (name) {
-		    return '<li><code class="show-code">' + name + '</code></li>';
-		  }).join('\n');
-		  document.getElementById('browserizr-check').innerHTML = checkResults;
-		  document.getElementById('browserizr-userAgent').innerHTML = window.Browserizr.userAgent;
-		  document.getElementById('browserizr-platform').innerHTML = window.Browserizr.platform;
-		});
+	    (function (Browserizr) {
+          var checks = window.Browserizr.check();
+          var checkResults = [];
+          for (var i = 0; i < checks.length; i++) {
+            checkResults.push('<li><code class="show-code">' + checks[i] + '</code></li>');
+          }
+
+          document.getElementById('browserizr-check').innerHTML = checkResults.join('\n');
+          document.getElementById('browserizr-userAgent').innerHTML = window.Browserizr.userAgent;
+          document.getElementById('browserizr-platform').innerHTML = window.Browserizr.platform;
+	    })(window.Browserizr);
 	</script>
 </body>
 </html>

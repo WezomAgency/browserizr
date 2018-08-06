@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dutchenkoOleg/node-w3c-validator/blob/master/LICENSE)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> **Browserizr** is tiny library, that detect your browser and platform,  
+> **Browserizr** is tiny library, that detects your browser and platform,  
 > with testing `window.navigator.userAgent` and `window.navigator.platform`.
 
 ---
@@ -99,7 +99,6 @@ Browserizr has detects test for:
 1. `android6`
 1. `android7`
 1. `android8`
-1. `blink`
 1. `chrome`
 1. `edge`
 1. `edge-android`
@@ -115,11 +114,11 @@ Browserizr has detects test for:
 1. `iphone`
 1. `iphone4`
 1. `iphone5`
-1. `iphone678` - iPhone 6/7/8
-1. `iphone678plus` - iPhone 6/7/8 plus
+1. `iphone678` - _iPhone 6/7/8_
+1. `iphone678plus` - _iPhone 6/7/8 plus_
 1. `iphonex`
-1. `linux` - based on platform test
-1. `mac` - based on platform test
+1. `linux`
+1. `mac`
 1. `maclike`
 1. `meizu-phone`
 1. `meizunote-phone`
@@ -128,8 +127,7 @@ Browserizr has detects test for:
 1. `redmi-phone`
 1. `redminote-phone`
 1. `safari`
-1. `webkit`
-1. `windows` - based on platform test
+1. `windows`
 1. `windows-xp`
 1. `windows-vista`
 1. `windows7`
@@ -144,12 +142,22 @@ Browserizr has detects test for:
 ### userAgent
 
 type: `string`  
-default: _current_ `window.navigator.userAgent`
+default: `window.navigator.userAgent`
 
 ### platform
 
 type: `string`  
-default: _current_ `window.navigator.platform`
+default: `window.navigator.platform`
+
+### width
+
+type: `number`  
+default: `window.screen.width`
+
+### height
+
+type: `number`  
+default: `window.screen.height`
 
 ### check()
 
@@ -210,8 +218,8 @@ Browserizr.addClasses(['iphone', 'iphonex'], '', document.body)
 
 // or 
 Browserizr.addClasses(['windows', 'mac'], 'my-element--', document.querySelectorAll('.my-element'))
-// <div class="my-element my-element--windows my-element--not-mac"> if Macintosh
-// <div class="my-element my-element--not-windows my-element--mac"> if Windows
+// <div class="my-element my-element--windows my-element--not-mac"> if Windows
+// <div class="my-element my-element--not-windows my-element--mac"> if Macintosh
 // <div class="my-element my-element--not-windows my-element--not-mac"> if Linux ))
 ```
 

@@ -46,14 +46,12 @@ var Browserizr = (function () {
       return (/android 8\./i.test(ua)
       )
     },
-    blink: function blink (ua) {
-      return (window.chrome || window.Intl && window.Intl.v8BreakIterator) && 'CSS' in window && !this.edge(ua)
-    },
     chrome: function chrome (ua) {
-      return !!window.chrome && !this.opera(ua) && !this.edge(ua)
+      return (/ Chrome\/\d/i.test(ua) && !this.opera(ua) && !this.safari(ua) && !/ Edg[e|A|i]\/\d/i.test(ua)
+      )
     },
     edge: function edge (ua) {
-      return (/ edge\//i.test(ua)
+      return (/ Edge\/\d/i.test(ua)
       )
     },
     'edge-android': function edgeAndroid (ua) {
@@ -64,51 +62,55 @@ var Browserizr = (function () {
       return (/\sEdgiOS\//i.test(ua)
       )
     },
-    ie: function ie () {
-      return !!document.documentMode
+    ie: function ie (ua) {
+      return (/(MSIE|Trident)/i.test(ua)
+      )
     },
-    ie8: function ie8 () {
-      return !!(document.all && !document.addEventListener)
+    ie8: function ie8 (ua) {
+      return (/MSIE 8\.\d/i.test(ua)
+      )
     },
-    ie9: function ie9 () {
-      return !!(document.all && !window.atob && !!document.addEventListener)
+    ie9: function ie9 (ua) {
+      return (/MSIE 9\.\d/i.test(ua)
+      )
     },
-    ie10: function ie10 () {
-      return !!(document.all && !!window.atob && !!document.addEventListener)
+    ie10: function ie10 (ua) {
+      return (/MSIE 10\.\d/i.test(ua)
+      )
     },
     ie11: function ie11 (ua) {
       return (/Trident.*rv[ :]*11\./.test(ua)
       )
     },
-    ios: function ios (ua) {
-      return this.ipad(ua) || this.ipod(ua) || this.iphone(ua)
+    ios: function ios (ua, platform) {
+      return this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
     },
-    ipad: function ipad (ua) {
-      return (/iPad/i.test(ua)
+    ipad: function ipad (ua, platform) {
+      return (/iPad/i.test(platform)
       )
     },
-    ipod: function ipod (ua) {
-      return (/iPod/i.test(ua)
+    ipod: function ipod (ua, platform) {
+      return (/iPod/i.test(platform)
       )
     },
-    iphone: function iphone (ua) {
-      return (/iPhone/i.test(ua)
+    iphone: function iphone (ua, platform) {
+      return (/iPhone/i.test(platform)
       )
     },
     iphone4: function iphone4 (ua) {
-      return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 480
+      return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 480
     },
     iphone5: function iphone5 (ua) {
-      return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 568
+      return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 568
     },
     iphone678: function iphone678 (ua) {
-      return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 667
+      return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 667
     },
     iphone678plus: function iphone678plus (ua) {
-      return this.iphone(ua) && this.wh.width === 414 && this.wh.height === 736
+      return this.iphone(ua) && Browserizr.width === 414 && Browserizr.height === 736
     },
     iphonex: function iphonex (ua) {
-      return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
+      return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 812
     },
     linux: function linux (ua, platform) {
       return (/Linux/.test(platform)
@@ -119,7 +121,7 @@ var Browserizr = (function () {
       )
     },
     maclike: function maclike (ua, platform) {
-      return this.mac(ua, platform) || this.ios(ua)
+      return this.mac(ua, platform) || this.ios(ua, platform)
     },
     'meizu-phone': function meizuPhone (ua) {
       return (/Android\s.*MZ(-)?/i.test(ua)
@@ -130,10 +132,12 @@ var Browserizr = (function () {
       )
     },
     moz: function moz (ua) {
-      return typeof InstallTrigger !== 'undefined' || / Firefox\//i.test(ua)
+      return (/ Firefox\//i.test(ua)
+      )
     },
     opera: function opera (ua) {
-      return !!window.opera || /Opera|OPR\//i.test(ua)
+      return (/Opera|OPR\//i.test(ua)
+      )
     },
     'redmi-phone': function redmiPhone (ua) {
       return (/Android\s.*Redmi\s/i.test(ua)
@@ -144,11 +148,8 @@ var Browserizr = (function () {
       )
     },
     safari: function safari (ua) {
-      return (/^((?!chrome|android).)*safari/i.test(ua)
+      return (/ Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua)
       )
-    },
-    webkit: function webkit (ua) {
-      return !!('WebkitAppearance' in document.documentElement.style && !this.edge(ua))
     },
     windows: function windows (ua, platform) {
       return (/^win/i.test(platform)
@@ -180,20 +181,15 @@ var Browserizr = (function () {
     }
   }
 
-  var width = window.screen.width
-  var height = window.screen.height
-  if (width > height) {
-    var tmp = height
-    height = width
-    width = tmp
-  }
+  console.log('- ' + Object.keys(_tests).join('\n- '));
 
-  Object.defineProperty(_tests, 'wh', {
-    value: { width: width, height: height },
-    writable: false,
-    configurable: false,
-    enumerable: false
-  })
+  var _width = window.screen.width
+  var _height = window.screen.height
+  if (_width > _height) {
+    var _tmp = _height
+    _height = _width
+    _width = _tmp
+  }
 
   // ----------------------------------------
   // Public
@@ -204,6 +200,16 @@ var Browserizr = (function () {
    * @public
    */
   var Browserizr = {
+    /**
+     * @type {number}
+     */
+    width: _width,
+
+    /**
+     * @type {number}
+     */
+    height: _height,
+
     /**
      * @type {string}
      */
@@ -245,25 +251,18 @@ var Browserizr = (function () {
      * @param {Element} [element=document.documentElement]
      */
     addClasses: function addClasses (tests, classPrefix, element) {
-      var _this = this
-
       classPrefix = classPrefix || ''
       element = element || document.documentElement
 
-      var classes = tests.map(function (test) {
-        var result = _this.is(test)
+      for (var i = 0; i < tests.length; i++) {
+        var result = this.is(tests[i])
         if (result === null) {
-          return false
+          continue
         }
         var prefix = result ? '' : 'not-'
-        return classPrefix + prefix + test
-      }).filter(function (result) {
-        return !!result
-      })
-
-      classes.forEach(function (cssClass) {
+        var cssClass = classPrefix + prefix + tests[i]
         element.classList.add(cssClass.toLowerCase())
-      })
+      }
     },
 
     /**

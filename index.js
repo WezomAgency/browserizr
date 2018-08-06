@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 0.0.5
+ * @version 1.0.0
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */
@@ -44,16 +44,12 @@ const _tests = {
     return /android 8\./i.test(ua)
   },
 
-  blink (ua) {
-    return ((window.chrome || (window.Intl && window.Intl.v8BreakIterator)) && 'CSS' in window) && !this.edge(ua)
-  },
-
   chrome (ua) {
-    return (!!window.chrome && !this.opera(ua) && !this.edge(ua))
+    return (/ Chrome\/\d/i.test(ua) && !this.opera(ua) && !this.safari(ua)) && !/ Edg[e|A|i]\/\d/i.test(ua)
   },
 
   edge (ua) {
-    return / edge\//i.test(ua)
+    return / Edge\/\d/i.test(ua)
   },
 
   'edge-android' (ua) {
@@ -64,60 +60,60 @@ const _tests = {
     return /\sEdgiOS\//i.test(ua)
   },
 
-  ie () {
-    return !!document.documentMode
+  ie (ua) {
+    return /(MSIE|Trident)/i.test(ua)
   },
 
-  ie8 () {
-    return !!(document.all && !document.addEventListener)
+  ie8 (ua) {
+    return /MSIE 8\.\d/i.test(ua)
   },
 
-  ie9 () {
-    return !!(document.all && !window.atob && !!document.addEventListener)
+  ie9 (ua) {
+    return /MSIE 9\.\d/i.test(ua)
   },
 
-  ie10 () {
-    return !!(document.all && !!window.atob && !!document.addEventListener)
+  ie10 (ua) {
+    return /MSIE 10\.\d/i.test(ua)
   },
 
   ie11 (ua) {
     return /Trident.*rv[ :]*11\./.test(ua)
   },
 
-  ios (ua) {
-    return this.ipad(ua) || this.ipod(ua) || this.iphone(ua)
+  ios (ua, platform) {
+    return this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
   },
 
-  ipad (ua) {
-    return /iPad/i.test(ua)
+  ipad (ua, platform) {
+    return /iPad/i.test(platform)
   },
 
-  ipod (ua) {
-    return /iPod/i.test(ua)
+  ipod (ua, platform) {
+    return /iPod/i.test(platform)
   },
 
-  iphone (ua) {
-    return /iPhone/i.test(ua)
+  iphone (ua, platform) {
+    return /iPhone/i.test(platform)
   },
 
   iphone4 (ua) {
-    return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 480
+    return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 480
   },
 
   iphone5 (ua) {
-    return this.iphone(ua) && this.wh.width === 320 && this.wh.height === 568
+    return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 568
   },
 
   iphone678 (ua) {
-    return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 667
+    return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 667
   },
 
   iphone678plus (ua) {
-    return this.iphone(ua) && this.wh.width === 414 && this.wh.height === 736
+    return this.iphone(ua) && Browserizr.width === 414 && Browserizr.height === 736
   },
 
   iphonex (ua) {
-    return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
+    return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 812
   },
 
   linux (ua, platform) {
@@ -129,7 +125,7 @@ const _tests = {
   },
 
   maclike (ua, platform) {
-    return this.mac(ua, platform) || this.ios(ua)
+    return this.mac(ua, platform) || this.ios(ua, platform)
   },
 
   'meizu-phone' (ua) {
@@ -141,11 +137,11 @@ const _tests = {
   },
 
   moz (ua) {
-    return (typeof InstallTrigger !== 'undefined' || / Firefox\//i.test(ua))
+    return / Firefox\//i.test(ua)
   },
 
   opera (ua) {
-    return (!!window.opera || /Opera|OPR\//i.test(ua))
+    return /Opera|OPR\//i.test(ua)
   },
 
   'redmi-phone' (ua) {
@@ -157,11 +153,7 @@ const _tests = {
   },
 
   safari (ua) {
-    return /^((?!chrome|android).)*safari/i.test(ua)
-  },
-
-  webkit (ua) {
-    return !!('WebkitAppearance' in document.documentElement.style && !this.edge(ua))
+    return / Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua)
   },
 
   windows (ua, platform) {
@@ -193,20 +185,13 @@ const _tests = {
   }
 }
 
-let width = window.screen.width
-let height = window.screen.height
-if (width > height) {
-  let tmp = height
-  height = width
-  width = tmp
+let _width = window.screen.width
+let _height = window.screen.height
+if (_width > _height) {
+  let _tmp = _height
+  _height = _width
+  _width = _tmp
 }
-
-Object.defineProperty(_tests, 'wh', {
-  value: {width, height},
-  writable: false,
-  configurable: false,
-  enumerable: false
-})
 
 // ----------------------------------------
 // Public
@@ -217,6 +202,16 @@ Object.defineProperty(_tests, 'wh', {
  * @public
  */
 const Browserizr = {
+  /**
+   * @type {number}
+   */
+  width: _width,
+
+  /**
+   * @type {number}
+   */
+  height: _height,
+
   /**
    * @type {string}
    */
@@ -261,18 +256,15 @@ const Browserizr = {
     classPrefix = classPrefix || ''
     element = element || document.documentElement
 
-    const classes = tests.map(test => {
-      const result = this.is(test)
+    for (let i = 0; i < tests.length; i++) {
+      const result = this.is(tests[i])
       if (result === null) {
-        return false
+        continue
       }
       const prefix = result ? '' : 'not-'
-      return classPrefix + prefix + test
-    }).filter(result => !!result)
-
-    classes.forEach(cssClass => {
+      const cssClass = classPrefix + prefix + tests[i]
       element.classList.add(cssClass.toLowerCase())
-    })
+    }
   },
 
   /**
