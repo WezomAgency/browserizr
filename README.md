@@ -203,7 +203,7 @@ Browserizr.addClasses(['iphone', 'android'], 'is-')
 // <html class="is-not-iphone is-android"> -> if Android
 
 // or 
-Browserizr.addClasses(['iphone', 'iphone678'], '', document.body)
+Browserizr.addClasses(['iphone', 'iphonex'], '', document.body)
 // <body class="iphone iphonex"> -> if iPhone and iPhone X
 // <body class="iphone not-iphonex"> -> if iPhone and not iPhone X
 // <body class="not-iphone not-iphonex"> -> if not iPhone
