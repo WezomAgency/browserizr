@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 1.0.0
+ * @version 1.0.1
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */

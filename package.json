@@ -1,6 +1,6 @@
 {
   "name": "browserizr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browserizr is tiny library, that detects your browser and platform, with testing window.navigator.userAgent and window.navigator.platform.",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,6 @@
     "android6",
     "android7",
     "android8",
-    "blink",
     "chrome",
     "edge",
     "edge-android",
@@ -60,7 +59,6 @@
     "redmi-phone",
     "redminote-phone",
     "safari",
-    "webkit",
     "windows",
     "windows-xp",
     "windows-vista",
