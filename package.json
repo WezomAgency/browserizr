@@ -1,7 +1,7 @@
 {
   "name": "browserizr",
   "version": "0.0.1",
-  "description": "",
+  "description": "Browserizr is tiny library, that detects your browser and platform, with testing window.navigator.userAgent and window.navigator.platform.",
   "main": "index.js",
   "scripts": {
     "build": "npm test && npm run rollup && npm run uglify && npm run eslint-dist",

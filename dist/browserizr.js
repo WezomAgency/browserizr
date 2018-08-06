@@ -109,6 +109,10 @@ var Browserizr = (function () {
     iphonex: function iphonex (ua) {
       return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
     },
+    linux: function linux (ua, platform) {
+      return (/Linux/.test(platform)
+      )
+    },
     mac: function mac (ua, platform) {
       return (/Mac/.test(platform)
       )
@@ -190,8 +194,6 @@ var Browserizr = (function () {
     enumerable: false
   })
 
-  console.log(_tests)
-
   // ----------------------------------------
   // Public
   // ----------------------------------------
@@ -237,23 +239,23 @@ var Browserizr = (function () {
     },
 
     /**
-     * @param {string[]} testList
+     * @param {string[]} tests
      * @param {string} [classPrefix=""]
      * @param {Element} [element=document.documentElement]
      */
-    addClasses: function addClasses (testList, classPrefix, element) {
+    addClasses: function addClasses (tests, classPrefix, element) {
       var _this = this
 
       classPrefix = classPrefix || ''
       element = element || document.documentElement
 
-      var classes = testList.map(function (test) {
+      var classes = tests.map(function (test) {
         var result = _this.is(test)
         if (result === null) {
           return false
         }
-        var prefix = result ? '' : 'no-'
-        return prefix + classPrefix + test
+        var prefix = result ? '' : 'not-'
+        return classPrefix + prefix + test
       }).filter(function (result) {
         return !!result
       })

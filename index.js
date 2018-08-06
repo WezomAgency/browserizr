@@ -119,6 +119,10 @@ const _tests = {
     return this.iphone(ua) && this.wh.width === 375 && this.wh.height === 812
   },
 
+  linux (ua, platform) {
+    return /Linux/.test(platform)
+  },
+
   mac (ua, platform) {
     return /Mac/.test(platform)
   },
@@ -248,21 +252,21 @@ const Browserizr = {
   },
 
   /**
-   * @param {string[]} testList
+   * @param {string[]} tests
    * @param {string} [classPrefix=""]
    * @param {Element} [element=document.documentElement]
    */
-  addClasses (testList, classPrefix, element) {
+  addClasses (tests, classPrefix, element) {
     classPrefix = classPrefix || ''
     element = element || document.documentElement
 
-    const classes = testList.map(test => {
+    const classes = tests.map(test => {
       const result = this.is(test)
       if (result === null) {
         return false
       }
-      const prefix = result ? '' : 'no-'
-      return prefix + classPrefix + test
+      const prefix = result ? '' : 'not-'
+      return classPrefix + prefix + test
     }).filter(result => !!result)
 
     classes.forEach(cssClass => {
