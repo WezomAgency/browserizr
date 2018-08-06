@@ -15,7 +15,9 @@
     "type": "git",
     "url": "git+https://github.com/WezomAgency/browserizr.git"
   },
-  "keywords": [],
+  "keywords": [
+    "browser", "js", "detect", "userAgent", "platform", "android", "android3", "android4", "android5", "android6", "android7", "android8", "blink", "chrome", "edge", "edge-android", "edge-ios", "ie", "ie8", "ie9", "ie10", "ie11", "ios", "ipad", "ipod", "iphone", "iphone4", "iphone5", "iphone6", "iphone7", "iphone8", "iphonex", "linux", "mac", "maclike", "meizu-phone", "meizunote-phone", "mozilla", "firefox", "opera", "redmi-phone", "redminote-phone", "safari", "webkit", "windows", "windows-xp", "windows-vista", "windows7", "windows8", "windows10", "windows-phone"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
