@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 0.0.5
+   * @version 1.0.0
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @licence MIT
    */
@@ -180,8 +180,6 @@ var Browserizr = (function () {
       )
     }
   }
-
-  console.log('- ' + Object.keys(_tests).join('\n- '));
 
   var _width = window.screen.width
   var _height = window.screen.height
