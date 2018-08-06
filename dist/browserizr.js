@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 0.0.1
+   * @version 0.0.3
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    */
 
