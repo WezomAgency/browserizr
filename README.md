@@ -33,7 +33,7 @@ $ npm i browserizr
 
 ### Download
 
-- [browserizr.js (es6)](https://unpkg.com/browserizr@latest/browserizr.js)
+- [browserizr.js (es6)](https://unpkg.com/browserizr@latest/index.js)
 - [browserizr.js](https://unpkg.com/browserizr@latest/dist/browserizr.js)
 - [browserizr.min.js](https://unpkg.com/browserizr@latest/dist/browserizr.min.js)
 
