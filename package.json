@@ -1,16 +1,26 @@
 {
   "name": "browserizr",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Browserizr is tiny library, that detects your browser and platform, with testing window.navigator.userAgent and window.navigator.platform.",
   "main": "index.js",
   "scripts": {
-    "build": "npm test && npm run rollup && npm run uglify && npm run eslint-dist",
-    "test": "npm run eslint",
-    "serve": "browser-sync start -s --open external",
+    "build": "npm test && npm run dist && npm run eslint-dist",
+    "test": "npm run eslint && npm run jest",
+    "jest": "jest",
+    "dist": "npm run rollup && npm run uglify && npm run eslint-dist",
     "rollup": "rollup -c",
     "uglify": "uglifyjs -cmo dist/browserizr.min.js -- dist/browserizr.js",
-    "eslint": "eslint \"./index.js\" --fix --parser babel-eslint --parser-options \"ecmaVersion: 6\"",
-    "eslint-dist": "eslint \"./dist/browserizr.js\" --fix --rule \"no-unused-vars: 0, no-mixed-operators: 0\" --parser-options \"ecmaVersion: 5\""
+    "eslint": "eslint \"./index.js\" --fix --parser babel-eslint --parser-options \"ecmaVersion: 6\" --cache --cache-location ./.cache/.eslintcache",
+    "eslint-dist": "eslint \"./dist/browserizr.js\" --fix --rule \"no-unused-vars: 0, no-mixed-operators: 0\" --parser-options \"ecmaVersion: 5\" --cache --cache-location ./.cache/.eslintcache-dist",
+    "serve": "browser-sync start -s --open external"
+  },
+  "jest": {
+    "verbose": true,
+    "cacheDirectory": "./.cache/jest/",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "repository": {
     "type": "git",
@@ -75,6 +85,7 @@
   "homepage": "https://github.com/WezomAgency/browserizr#readme",
   "devDependencies": {
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
     "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.24.6",
     "eslint": "^5.3.0",

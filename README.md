@@ -1,9 +1,9 @@
 # Browserizr
 
 ![Status - Working in progress](https://img.shields.io/badge/Status-WIP-red.svg)
-[![Build Status](https://travis-ci.org/WezomAgency/browserizr.svg?branch=master)](https://travis-ci.org/WezomAgency/browserizr)
 [![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dutchenkoOleg/node-w3c-validator/blob/master/LICENSE)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/WezomAgency/browserizr.svg?branch=master)](https://travis-ci.org/WezomAgency/browserizr)
 
 > **Browserizr** is tiny library, that detects your browser and platform,  
 > with testing `window.navigator.userAgent` and `window.navigator.platform`.
