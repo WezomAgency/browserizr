@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 1.0.1
+ * @version 1.0.2
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */
@@ -228,7 +228,7 @@ const Browserizr = {
    */
   is (test) {
     if (_tests.hasOwnProperty(test)) {
-      return _tests[test](this.userAgent, this.platform)
+      return !!_tests[test](this.userAgent, this.platform)
     }
     console.warn('Browserizr WARN! No test with name "' + test + '"')
     return null
