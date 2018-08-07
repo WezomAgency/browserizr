@@ -27,6 +27,7 @@ index.html
 .babelrc
 .editorconfig
 .eslintrc.json
+.travis.yml
 rollup.config.js
 CHANGELOG.md
 CODE_OF_CONDUCT.md
