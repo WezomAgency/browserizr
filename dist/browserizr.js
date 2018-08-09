@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 1.0.2
+   * @version 1.1.0
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @licence MIT
    */
@@ -129,6 +129,10 @@ var Browserizr = (function () {
     },
     'meizunote-phone': function meizunotePhone (ua) {
       return (/Android\s.*MZ(-)?.*\snote\s/i.test(ua)
+      )
+    },
+    mobile: function mobile (ua) {
+      return (/Mobile/i.test(ua)
       )
     },
     moz: function moz (ua) {

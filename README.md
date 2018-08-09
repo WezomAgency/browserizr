@@ -1,6 +1,5 @@
 # Browserizr
 
-![Status - Working in progress](https://img.shields.io/badge/Status-WIP-red.svg)
 [![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dutchenkoOleg/node-w3c-validator/blob/master/LICENSE)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/WezomAgency/browserizr.svg?branch=master)](https://travis-ci.org/WezomAgency/browserizr)
@@ -123,6 +122,7 @@ Browserizr has detects test for:
 1. `maclike`
 1. `meizu-phone`
 1. `meizunote-phone`
+1. `mobile`
 1. `moz`
 1. `opera`
 1. `redmi-phone`
