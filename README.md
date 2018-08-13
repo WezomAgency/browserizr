@@ -222,6 +222,9 @@ Browserizr.addClasses(['windows', 'mac'], 'my-element--', document.querySelector
 // <div class="my-element my-element--windows my-element--not-mac"> if Windows
 // <div class="my-element my-element--not-windows my-element--mac"> if Macintosh
 // <div class="my-element my-element--not-windows my-element--not-mac"> if Linux ))
+
+// also you can provide jQuery elements 
+Browserizr.addClasses(['windows', 'mac'], 'my-element--', $('.my-element'))
 ```
 
 ### addTest(testName, testFn)
