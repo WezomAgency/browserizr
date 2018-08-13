@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 1.1.0
+   * @version 1.1.1
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @licence MIT
    */
@@ -250,11 +250,12 @@ var Browserizr = (function () {
     /**
      * @param {string[]} tests
      * @param {string} [classPrefix=""]
-     * @param {Element} [element=document.documentElement]
+     * @param {HTMLElement} [element=document.documentElement]
      */
     addClasses: function addClasses (tests, classPrefix, element) {
       classPrefix = classPrefix || ''
       element = element || document.documentElement
+      var classes = []
 
       for (var i = 0; i < tests.length; i++) {
         var result = this.is(tests[i])
@@ -263,7 +264,26 @@ var Browserizr = (function () {
         }
         var prefix = result ? '' : 'not-'
         var cssClass = classPrefix + prefix + tests[i]
-        element.classList.add(cssClass.toLowerCase())
+        classes.push(cssClass.toLowerCase())
+      }
+
+      if (element.jquery) {
+        element.addClass(classes.join(' '))
+      } else if (element.length) {
+        for (var _i = 0; _i < element.length; _i++) {
+          add(element[_i])
+        }
+      } else {
+        add(element)
+      }
+
+      /**
+       * @param {HTMLElement} el
+       */
+      function add (el) {
+        for (var _i2 = 0; _i2 < classes.length; _i2++) {
+          el.classList.add(classes[_i2])
+        }
       }
     },
 

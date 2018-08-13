@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 1.1.0
+ * @version 1.1.1
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */
@@ -254,11 +254,12 @@ const Browserizr = {
   /**
    * @param {string[]} tests
    * @param {string} [classPrefix=""]
-   * @param {Element} [element=document.documentElement]
+   * @param {HTMLElement} [element=document.documentElement]
    */
   addClasses (tests, classPrefix, element) {
     classPrefix = classPrefix || ''
     element = element || document.documentElement
+    const classes = []
 
     for (let i = 0; i < tests.length; i++) {
       const result = this.is(tests[i])
@@ -267,7 +268,26 @@ const Browserizr = {
       }
       const prefix = result ? '' : 'not-'
       const cssClass = classPrefix + prefix + tests[i]
-      element.classList.add(cssClass.toLowerCase())
+      classes.push(cssClass.toLowerCase())
+    }
+
+    if (element.jquery) {
+      element.addClass(classes.join(' '))
+    } else if (element.length) {
+      for (let i = 0; i < element.length; i++) {
+        add(element[i])
+      }
+    } else {
+      add(element)
+    }
+
+    /**
+     * @param {HTMLElement} el
+     */
+    function add (el) {
+      for (let i = 0; i < classes.length; i++) {
+        el.classList.add(classes[i])
+      }
     }
   },
 
