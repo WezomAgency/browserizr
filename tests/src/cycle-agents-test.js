@@ -9,7 +9,7 @@
 // ----------------------------------------
 
 import Browserizr from '../../index'
-import agents from './agents'
+import agents from './browsers-agents'
 
 // ----------------------------------------
 // Public
