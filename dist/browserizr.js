@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 1.1.2
+   * @version 1.2.0
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @licence MIT
    */
@@ -131,9 +131,8 @@ var Browserizr = (function () {
       return (/Android\s.*MZ(-)?.*\snote\s/i.test(ua)
       )
     },
-    mobile: function mobile (ua) {
-      return (/Mobile/i.test(ua)
-      )
+    mobile: function mobile (ua, platform) {
+      return this.android(ua) || this['edge-android'](ua) || this['edge-ios'](ua) || this['windows-phone'](ua) || this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
     },
     moz: function moz (ua) {
       return (/ Firefox\//i.test(ua)
