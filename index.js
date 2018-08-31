@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 1.2.0
+ * @version 1.3.0
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */
@@ -44,8 +44,20 @@ const _tests = {
     return /android 8\./i.test(ua)
   },
 
+  blackberry (ua) {
+    return /BlackBerry/i.test(ua)
+  },
+
+  blackberry10 (ua) {
+    return /BB10;/i.test(ua)
+  },
+
   chrome (ua) {
     return (/ Chrome\/\d/i.test(ua) && !this.opera(ua) && !this.safari(ua)) && !/ Edg[e|A|i]\/\d/i.test(ua)
+  },
+
+  desktop (ua, platrform) {
+    return !this.mobile(ua, platrform)
   },
 
   edge (ua) {
@@ -139,6 +151,8 @@ const _tests = {
   mobile (ua, platform) {
     return (
       this.android(ua) ||
+      this.blackberry(ua) ||
+      this.blackberry10(ua) ||
       this['edge-android'](ua) ||
       this['edge-ios'](ua) ||
       this['windows-phone'](ua) ||

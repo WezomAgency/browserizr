@@ -99,7 +99,10 @@ Browserizr has detects test for:
 1. `android6`
 1. `android7`
 1. `android8`
+1. `blackberry` _since v1.3.0_
+1. `blackberry10` _since v1.3.0_
 1. `chrome`
+1. `desktop` _since v1.3.0_
 1. `edge`
 1. `edge-android`
 1. `edge-ios`

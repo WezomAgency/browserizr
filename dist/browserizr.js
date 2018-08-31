@@ -3,7 +3,7 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 1.2.0
+   * @version 1.3.0
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @licence MIT
    */
@@ -46,9 +46,20 @@ var Browserizr = (function () {
       return (/android 8\./i.test(ua)
       )
     },
+    blackberry: function blackberry (ua) {
+      return (/BlackBerry/i.test(ua)
+      )
+    },
+    blackberry10: function blackberry10 (ua) {
+      return (/BB10;/i.test(ua)
+      )
+    },
     chrome: function chrome (ua) {
       return (/ Chrome\/\d/i.test(ua) && !this.opera(ua) && !this.safari(ua) && !/ Edg[e|A|i]\/\d/i.test(ua)
       )
+    },
+    desktop: function desktop (ua, platrform) {
+      return !this.mobile(ua, platrform)
     },
     edge: function edge (ua) {
       return (/ Edge\/\d/i.test(ua)
@@ -132,7 +143,7 @@ var Browserizr = (function () {
       )
     },
     mobile: function mobile (ua, platform) {
-      return this.android(ua) || this['edge-android'](ua) || this['edge-ios'](ua) || this['windows-phone'](ua) || this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
+      return this.android(ua) || this.blackberry(ua) || this.blackberry10(ua) || this['edge-android'](ua) || this['edge-ios'](ua) || this['windows-phone'](ua) || this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
     },
     moz: function moz (ua) {
       return (/ Firefox\//i.test(ua)
