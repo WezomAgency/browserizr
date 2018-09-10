@@ -74,7 +74,7 @@ var Browserizr = (function () {
       self.is_iphone4 = self.is_iphone && width === 320 && height === 480
       self.is_iphone5 = self.is_iphone && width === 320 && height === 568
       self.is_iphone678 = self.is_iphone && width === 375 && height === 667
-      self.is_iphone678Plus = self.is_iphone && width === 414 && height === 736
+      self.is_iphone678plus = self.is_iphone && width === 414 && height === 736
       self.is_iphonex = self.is_iphone && width === 375 && height === 812
       self.is_ios = self.is_ipad || self.is_ipod || self.is_iphone
 
@@ -108,7 +108,7 @@ var Browserizr = (function () {
       self.is_windows10 = /windows nt 10/i.test(ua)
 
       self.is_mobile = self.is_ios || self.is_android || self.is_edge_android || self.is_edge_ios || self.is_windows_phone || self.is_blackberry || self.is_blackberry10
-      self.is_desctop = !self.is_mobile
+      self.is_desktop = !self.is_mobile
     },
 
     /**
@@ -134,7 +134,8 @@ var Browserizr = (function () {
       element = element || document.documentElement
       var classes = []
 
-      for (var key in this) {
+      for (var i = 0; i < tests.length; i++) {
+        var key = tests[i]
         if (/^is_/.test(key)) {
           var result = this[key]
           var prefix = result ? 'is' : 'is-not'
@@ -146,8 +147,8 @@ var Browserizr = (function () {
       if (element.jquery) {
         element.addClass(classes.join(' '))
       } else if (element.length) {
-        for (var i = 0; i < element.length; i++) {
-          add(element[i])
+        for (var _i = 0; _i < element.length; _i++) {
+          add(element[_i])
         }
       } else {
         add(element)
@@ -157,12 +158,14 @@ var Browserizr = (function () {
        * @param {HTMLElement} el
        */
       function add (el) {
-        for (var _i = 0; _i < classes.length; _i++) {
-          el.classList.add(classes[_i])
+        for (var _i2 = 0; _i2 < classes.length; _i2++) {
+          el.classList.add(classes[_i2])
         }
       }
     }
   }
+
+  Browserizr.detect()
 
   return Browserizr
 }())

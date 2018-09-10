@@ -73,7 +73,7 @@ const Browserizr = {
     self.is_iphone4 = self.is_iphone && width === 320 && height === 480
     self.is_iphone5 = self.is_iphone && width === 320 && height === 568
     self.is_iphone678 = self.is_iphone && width === 375 && height === 667
-    self.is_iphone678Plus = self.is_iphone && width === 414 && height === 736
+    self.is_iphone678plus = self.is_iphone && width === 414 && height === 736
     self.is_iphonex = self.is_iphone && width === 375 && height === 812
     self.is_ios = self.is_ipad || self.is_ipod || self.is_iphone
 
@@ -115,7 +115,7 @@ const Browserizr = {
       self.is_blackberry ||
       self.is_blackberry10
     )
-    self.is_desctop = !self.is_mobile
+    self.is_desktop = !self.is_mobile
   },
 
   /**
@@ -141,7 +141,8 @@ const Browserizr = {
     element = element || document.documentElement
     const classes = []
 
-    for (let key in this) {
+    for (let i = 0; i < tests.length; i++) {
+      let key = tests[i]
       if (/^is_/.test(key)) {
         const result = this[key]
         const prefix = result ? 'is' : 'is-not'
@@ -170,6 +171,8 @@ const Browserizr = {
     }
   }
 }
+
+Browserizr.detect()
 
 // ----------------------------------------
 // Exports
