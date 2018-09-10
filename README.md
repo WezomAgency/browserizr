@@ -58,30 +58,30 @@ import Browserizr from 'browserizr'
 
 ```js
 // with conditions
-if (Browserizr.is('chrome')) {
+if (Browserizr.is_chrome) {
   // code for chrome
 }
 
 // add CSS classes to html (element is optional)
-Browserizr.addClasses(['ie', 'ie11'])
+Browserizr.addClasses(['is_ie', 'is_ie11'])
 ```
 
 ### CSS
 
 ```css
 /**************************************************
-in js file -> Browserizr.addClasses(['ie', 'ie11'])
+in js file -> Browserizr.addClasses(['is_ie', 'is_ie11'])
 **************************************************/
 
-.ie11 .my-element {
+.is-ie11 .my-element {
   /* css rules for IE browser */
 }
 
-.ie.not-ie11 .my-element {
+.is-ie.is-not-ie11 .my-element {
   /* css rules for all IE browsers, but not for 11 version */
 }
 
-.not-ie .my-element {
+.is-not-ie .my-element {
   /* css rules for all browsers, but not for IE */
 }
 ```
@@ -92,52 +92,52 @@ in js file -> Browserizr.addClasses(['ie', 'ie11'])
 
 Browserizr has detects test for:
 
-1. `android`
-1. `android3`
-1. `android4`
-1. `android5`
-1. `android6`
-1. `android7`
-1. `android8`
-1. `blackberry` _since v1.3.0_
-1. `blackberry10` _since v1.3.0_
-1. `chrome`
-1. `desktop` _since v1.3.0_
-1. `edge`
-1. `edge-android`
-1. `edge-ios`
-1. `ie`
-1. `ie8`
-1. `ie9`
-1. `ie10`
-1. `ie11`
-1. `ios`
-1. `ipad`
-1. `ipod`
-1. `iphone`
-1. `iphone4`
-1. `iphone5`
-1. `iphone678` - _iPhone 6/7/8_
-1. `iphone678plus` - _iPhone 6/7/8 plus_
-1. `iphonex`
-1. `linux`
-1. `mac`
-1. `maclike`
-1. `meizu-phone`
-1. `meizunote-phone`
-1. `mobile`
-1. `moz`
-1. `opera`
-1. `redmi-phone`
-1. `redminote-phone`
-1. `safari`
-1. `windows`
-1. `windows-xp`
-1. `windows-vista`
-1. `windows7`
-1. `windows8`
-1. `windows10`
-1. `windows-phone`
+1. `is_android`
+1. `is_android3`
+1. `is_android4`
+1. `is_android5`
+1. `is_android6`
+1. `is_android7`
+1. `is_android8`
+1. `is_blackberry`
+1. `is_blackberry10`
+1. `is_chrome`
+1. `is_desktop`
+1. `is_edge`
+1. `is_edge_android`
+1. `is_edge_ios`
+1. `is_ie`
+1. `is_ie8`
+1. `is_ie9`
+1. `is_ie10`
+1. `is_ie11`
+1. `is_ios`
+1. `is_ipad`
+1. `is_ipod`
+1. `is_iphone`
+1. `is_iphone4`
+1. `is_iphone5`
+1. `is_iphone678` - _iPhone 6/7/8_
+1. `is_iphone678plus` - _iPhone 6/7/8 plus_
+1. `is_iphonex`
+1. `is_linux`
+1. `is_mac`
+1. `is_maclike`
+1. `is_meizu_phone`
+1. `is_meizunote_phone`
+1. `is_mobile`
+1. `is_moz`
+1. `is_opera`
+1. `is_redmi_phone`
+1. `is_redminote_phone`
+1. `is_safari`
+1. `is_windows`
+1. `is_windows_xp`
+1. `is_windows_vista`
+1. `is_windows7`
+1. `is_windows8`
+1. `is_windows10`
+1. `is_windows_phone`
 
 ---
 
@@ -163,31 +163,29 @@ default: `window.screen.width`
 type: `number`  
 default: `window.screen.height`
 
-### check()
+### detect()
 
-Returns: `{string[]}` - array of all positive detects.
+Run this method for re-detect initial tests
+
+### detected()
+
+Returns: `{string[]}` - array of all positive tests.
 
 _Example:_
  
 ```js
-var detects = Browserizr.check()
+var detects = Browserizr.detected()
 console.log(detects.join(' | '))
 ```
 
-### is(test)
+### is_[detect_name]
 
-_Parameters:_
-
-Name | Data type | Description
- --- | --- | ---
- `test` | `string` | test name
-
-Returns: `{boolean|null}` - `null` if test not specified
+Check needed detect
 
 _Example:_
  
 ```js
-if (Browserizr.is('edge')) {
+if (Browserizr.is_edge) {
   // your code for edge
 }
 ```
@@ -205,54 +203,26 @@ Name | Data type | Default value | Description
 _Example:_
 
 ```js
-Browserizr.addClasses(['iphone', 'android'])
-// <html class="iphone not-android"> -> if iPhone
-// <html class="not-iphone android"> -> if Android
-
-// or 
-Browserizr.addClasses(['iphone', 'android'], 'is-')
+Browserizr.addClasses(['is_iphone', 'is_android'])
 // <html class="is-iphone is-not-android"> -> if iPhone
 // <html class="is-not-iphone is-android"> -> if Android
 
 // or 
-Browserizr.addClasses(['iphone', 'iphonex'], '', document.body)
-// <body class="iphone iphonex"> -> if iPhone and iPhone X
-// <body class="iphone not-iphonex"> -> if iPhone and not iPhone X
-// <body class="not-iphone not-iphonex"> -> if not iPhone
+Browserizr.addClasses(['is_iphone', 'is_iphonex'], '', document.body)
+// <body class="is-iphone is-iphonex"> -> if iPhone and iPhone X
+// <body class="is-iphone is-not-iphonex"> -> if iPhone and not iPhone X
+// <body class="is-not-iphone is-not-iphonex"> -> if not iPhone
 
 // or 
-Browserizr.addClasses(['windows', 'mac'], 'my-element--', document.querySelectorAll('.my-element'))
-// <div class="my-element my-element--windows my-element--not-mac"> if Windows
-// <div class="my-element my-element--not-windows my-element--mac"> if Macintosh
-// <div class="my-element my-element--not-windows my-element--not-mac"> if Linux ))
+Browserizr.addClasses(['is_windows', 'is_mac'], 'my-element--', document.querySelectorAll('.my-element'))
+// <div class="my-element my-element--is-windows my-element--is-not-mac"> if Windows
+// <div class="my-element my-element--is-not-windows my-element--is-mac"> if Macintosh
+// <div class="my-element my-element--is-not-windows my-element--is-not-mac"> if Linux ))
 
 // also you can provide jQuery elements 
-Browserizr.addClasses(['windows', 'mac'], 'my-element--', $('.my-element'))
+Browserizr.addClasses(['is_windows', 'is_mac'], 'my-element--', $('.my-element'))
 ```
 
 ### addTest(testName, testFn)
 
-_Parameters:_
-
-Name | Data type | Description
- --- | --- | ---
- `testName` | `string` | test name
- `testFn` | `function` | your custom detecting function
- 
-_Example:_
-
-```js
-Browserizr.addTest('nexus6', function(ua) {
-  return /Nexus\s6/i.test(ua)
-})
-
-Browserizr.addTest('windows32', function(ua, platform) {
-  return /^Win32/i.test(platform)
-})
-
-if (Browserizr.is('nexus6')) {
-  // your code for nexus
-}
-
-Browserizr.addClasses(['nexus6', 'windows32'])
-```
+Coming soon
