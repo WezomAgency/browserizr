@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 1.3.0
+ * @version 2.0.0
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @licence MIT
  */
@@ -11,212 +11,12 @@
 // Private
 // ----------------------------------------
 
-/**
- * @type {Object}
- * @private
- */
-const _tests = {
-  android (ua) {
-    return /android/i.test(ua)
-  },
-
-  android3 (ua) {
-    return /android 3\./i.test(ua)
-  },
-
-  android4 (ua) {
-    return /android 4\./i.test(ua)
-  },
-
-  android5 (ua) {
-    return /android 5\./i.test(ua)
-  },
-
-  android6 (ua) {
-    return /android 6\./i.test(ua)
-  },
-
-  android7 (ua) {
-    return /android 7\./i.test(ua)
-  },
-
-  android8 (ua) {
-    return /android 8\./i.test(ua)
-  },
-
-  blackberry (ua) {
-    return /BlackBerry/i.test(ua)
-  },
-
-  blackberry10 (ua) {
-    return /BB10;/i.test(ua)
-  },
-
-  chrome (ua) {
-    return (/ Chrome\/\d/i.test(ua) && !this.opera(ua) && !this.safari(ua)) && !/ Edg[e|A|i]\/\d/i.test(ua)
-  },
-
-  desktop (ua, platrform) {
-    return !this.mobile(ua, platrform)
-  },
-
-  edge (ua) {
-    return / Edge\/\d/i.test(ua)
-  },
-
-  'edge-android' (ua) {
-    return /\sEdgA\//i.test(ua)
-  },
-
-  'edge-ios' (ua) {
-    return /\sEdgiOS\//i.test(ua)
-  },
-
-  ie (ua) {
-    return /(MSIE|Trident)/i.test(ua)
-  },
-
-  ie8 (ua) {
-    return /MSIE 8\.\d/i.test(ua)
-  },
-
-  ie9 (ua) {
-    return /MSIE 9\.\d/i.test(ua)
-  },
-
-  ie10 (ua) {
-    return /MSIE 10\.\d/i.test(ua)
-  },
-
-  ie11 (ua) {
-    return /Trident.*rv[ :]*11\./.test(ua)
-  },
-
-  ios (ua, platform) {
-    return this.ipad(ua, platform) || this.ipod(ua, platform) || this.iphone(ua, platform)
-  },
-
-  ipad (ua, platform) {
-    return /iPad/i.test(platform)
-  },
-
-  ipod (ua, platform) {
-    return /iPod/i.test(platform)
-  },
-
-  iphone (ua, platform) {
-    return /iPhone/i.test(platform)
-  },
-
-  iphone4 (ua) {
-    return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 480
-  },
-
-  iphone5 (ua) {
-    return this.iphone(ua) && Browserizr.width === 320 && Browserizr.height === 568
-  },
-
-  iphone678 (ua) {
-    return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 667
-  },
-
-  iphone678plus (ua) {
-    return this.iphone(ua) && Browserizr.width === 414 && Browserizr.height === 736
-  },
-
-  iphonex (ua) {
-    return this.iphone(ua) && Browserizr.width === 375 && Browserizr.height === 812
-  },
-
-  linux (ua, platform) {
-    return /Linux/.test(platform)
-  },
-
-  mac (ua, platform) {
-    return /Mac/.test(platform)
-  },
-
-  maclike (ua, platform) {
-    return this.mac(ua, platform) || this.ios(ua, platform)
-  },
-
-  'meizu-phone' (ua) {
-    return /Android\s.*MZ(-)?/i.test(ua)
-  },
-
-  'meizunote-phone' (ua) {
-    return /Android\s.*MZ(-)?.*\snote\s/i.test(ua)
-  },
-
-  mobile (ua, platform) {
-    return (
-      this.android(ua) ||
-      this.blackberry(ua) ||
-      this.blackberry10(ua) ||
-      this['edge-android'](ua) ||
-      this['edge-ios'](ua) ||
-      this['windows-phone'](ua) ||
-      this.ipad(ua, platform) ||
-      this.ipod(ua, platform) ||
-      this.iphone(ua, platform)
-    )
-  },
-
-  moz (ua) {
-    return / Firefox\//i.test(ua)
-  },
-
-  opera (ua) {
-    return /Opera|OPR\//i.test(ua)
-  },
-
-  'redmi-phone' (ua) {
-    return /Android\s.*Redmi\s/i.test(ua)
-  },
-
-  'redminote-phone' (ua) {
-    return /Android\s.*Redmi.*\sNote\s/i.test(ua)
-  },
-
-  safari (ua) {
-    return / Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua)
-  },
-
-  windows (ua, platform) {
-    return /^win/i.test(platform)
-  },
-
-  'windows-xp' (ua) {
-    return /windows nt 5\.1/i.test(ua)
-  },
-
-  'windows-vista' (ua) {
-    return /windows nt 6\.0/i.test(ua)
-  },
-
-  windows7 (ua) {
-    return /windows nt 6\.1/i.test(ua)
-  },
-
-  windows8 (ua) {
-    return /windows nt 6\.[2|3]/i.test(ua)
-  },
-
-  windows10 (ua) {
-    return /windows nt 10/i.test(ua)
-  },
-
-  'windows-phone' (ua) {
-    return /Windows\sPhone/i.test(ua)
-  }
-}
-
-let _width = window.screen.width
-let _height = window.screen.height
-if (_width > _height) {
-  let _tmp = _height
-  _height = _width
-  _width = _tmp
+let _w = window.screen.width
+let _h = window.screen.height
+if (_w > _h) {
+  let _t = _h
+  _h = _w
+  _w = _t
 }
 
 // ----------------------------------------
@@ -231,12 +31,12 @@ const Browserizr = {
   /**
    * @type {number}
    */
-  width: _width,
+  width: _w,
 
   /**
    * @type {number}
    */
-  height: _height,
+  height: _h,
 
   /**
    * @type {string}
@@ -248,25 +48,83 @@ const Browserizr = {
    */
   platform: window.navigator.platform,
 
-  /**
-   * @param {string} test
-   * @return {boolean|null} - null if test not specified
-   */
-  is (test) {
-    if (_tests.hasOwnProperty(test)) {
-      return !!_tests[test](this.userAgent, this.platform)
-    }
-    console.warn('Browserizr WARN! No test with name "' + test + '"')
-    return null
+  detect () {
+    const ua = this.userAgent
+    const platform = this.platform
+    const width = this.width
+    const height = this.height
+    const self = this
+
+    self.is_android = /android/i.test(ua)
+    self.is_android3 = /android 3\./i.test(ua)
+    self.is_android4 = /android 4\./i.test(ua)
+    self.is_android5 = /android 5\./i.test(ua)
+    self.is_android6 = /android 6\./i.test(ua)
+    self.is_android7 = /android 7\./i.test(ua)
+    self.is_android8 = /android 8\./i.test(ua)
+    self.is_meizu_phone = /Android\s.*MZ(-)?/i.test(ua)
+    self.is_meizunote_phone = /Android\s.*MZ(-)?.*\snote\s/i.test(ua)
+    self.is_redmi_phone = /Android\s.*Redmi\s/i.test(ua)
+    self.is_redminote_phone = /Android\s.*Redmi.*\sNote\s/i.test(ua)
+
+    self.is_ipad = /iPad/i.test(platform)
+    self.is_ipod = /iPod/i.test(platform)
+    self.is_iphone = /iPhone/i.test(platform)
+    self.is_iphone4 = self.is_iphone && width === 320 && height === 480
+    self.is_iphone5 = self.is_iphone && width === 320 && height === 568
+    self.is_iphone678 = self.is_iphone && width === 375 && height === 667
+    self.is_iphone678Plus = self.is_iphone && width === 414 && height === 736
+    self.is_iphonex = self.is_iphone && width === 375 && height === 812
+    self.is_ios = self.is_ipad || self.is_ipod || self.is_iphone
+
+    self.is_mac = /Mac/.test(platform)
+    self.is_maclike = self.is_mac || self.is_ios
+
+    self.is_blackberry = /BlackBerry/i.test(ua)
+    self.is_blackberry10 = /BB10;/i.test(ua)
+
+    self.is_moz = / Firefox\//i.test(ua)
+    self.is_opera = /Opera|OPR\//i.test(ua)
+    self.is_safari = / Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua)
+    self.is_chrome = (/ Chrome\/\d/i.test(ua) && !self.is_opera && !self.is_safari) && !/ Edg[e|A|i]\/\d/i.test(ua)
+
+    self.is_ie = /(MSIE|Trident)/i.test(ua)
+    self.is_ie8 = /MSIE 8\.\d/i.test(ua)
+    self.is_ie9 = /MSIE 9\.\d/i.test(ua)
+    self.is_ie10 = /MSIE 10\.\d/i.test(ua)
+    self.is_ie11 = /Trident.*rv[ :]*11\./.test(ua)
+
+    self.is_edge = / Edge\/\d/i.test(ua)
+    self.is_edge_android = /\sEdgA\//i.test(ua)
+    self.is_edge_ios = /\sEdgiOS\//i.test(ua)
+    self.is_windows_phone = /\sEdgiOS\//i.test(ua)
+
+    self.is_windows = /^win/i.test(platform)
+    self.is_windows_xp = /windows nt 5\.1/i.test(ua)
+    self.is_windows_vista = /windows nt 6\.0/i.test(ua)
+    self.is_windows7 = /windows nt 6\.1/i.test(ua)
+    self.is_windows8 = /windows nt 6\.[2|3]/i.test(ua)
+    self.is_windows10 = /windows nt 10/i.test(ua)
+
+    self.is_mobile = (
+      self.is_ios ||
+      self.is_android ||
+      self.is_edge_android ||
+      self.is_edge_ios ||
+      self.is_windows_phone ||
+      self.is_blackberry ||
+      self.is_blackberry10
+    )
+    self.is_desctop = !self.is_mobile
   },
 
   /**
    * @return {string[]} - array of all positive detects
    */
-  check () {
-    let results = []
-    for (let key in _tests) {
-      if (this.is(key)) {
+  detected () {
+    const results = []
+    for (let key in this) {
+      if (/^is_/.test(key) && this[key]) {
         results.push(key)
       }
     }
@@ -283,14 +141,13 @@ const Browserizr = {
     element = element || document.documentElement
     const classes = []
 
-    for (let i = 0; i < tests.length; i++) {
-      const result = this.is(tests[i])
-      if (result === null) {
-        continue
+    for (let key in this) {
+      if (/^is_/.test(key)) {
+        const result = this[key]
+        const prefix = result ? 'is' : 'is-not'
+        const cssClass = classPrefix + key.replace(/_/, '-').replace(/^is/, prefix)
+        classes.push(cssClass.toLowerCase())
       }
-      const prefix = result ? '' : 'not-'
-      const cssClass = classPrefix + prefix + tests[i]
-      classes.push(cssClass.toLowerCase())
     }
 
     if (element.jquery) {
@@ -311,14 +168,6 @@ const Browserizr = {
         el.classList.add(classes[i])
       }
     }
-  },
-
-  /**
-   * @param {string} testName
-   * @param {function} testFn
-   */
-  addTest (testName, testFn) {
-    _tests[testName] = testFn
   }
 }
 
