@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm test && npm run dist && npm run eslint-dist",
-    "test": "npm run eslint",
+    "test": "npm run eslint && npm run jest",
     "jest": "jest",
     "dist": "npm run rollup && npm run uglify && npm run eslint-dist",
     "rollup": "rollup -c",
