@@ -21,24 +21,29 @@ import agents from './browsers-agents'
  * @param {string} shouldBeNotText
  */
 function cycleAgentsTest (testKey, shouldBeText, shouldBeNotText) {
-  agents[testKey].forEach(agent => {
-    it(`${testKey} - ${shouldBeText}`, () => {
-      Browserizr.userAgent = agent
-      expect(Browserizr.is(testKey)).toBeTruthy()
-    })
-  })
-
-  for (let key in agents) {
-    if (key === testKey) {
-      continue
-    }
-
-    agents[key].forEach(agent => {
-      it(`${key} - ${shouldBeNotText}`, () => {
+  if (shouldBeText) {
+    agents[testKey].forEach(agent => {
+      it(`${testKey} - ${shouldBeText}`, () => {
         Browserizr.userAgent = agent
-        expect(Browserizr.is(testKey)).toBeFalsy()
+        Browserizr.detect()
+        expect(Browserizr[testKey]).toBeTruthy()
       })
     })
+  }
+
+  if (shouldBeNotText) {
+    for (let key in agents) {
+      if (key === testKey) {
+        continue
+      }
+      agents[key].forEach(agent => {
+        it(`${key} - ${shouldBeNotText}`, () => {
+          Browserizr.userAgent = agent
+          Browserizr.detect()
+          expect(Browserizr[testKey]).toBeFalsy()
+        })
+      })
+    }
   }
 }
 
