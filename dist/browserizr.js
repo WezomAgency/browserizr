@@ -98,7 +98,7 @@ var Browserizr = (function () {
       self.is_edge = / Edge\/\d/i.test(ua)
       self.is_edge_android = /\sEdgA\//i.test(ua)
       self.is_edge_ios = /\sEdgiOS\//i.test(ua)
-      self.is_windows_phone = /\sEdgiOS\//i.test(ua)
+      self.is_windows_phone = /Windows\sPhone/i.test(ua)
 
       self.is_windows = /^win/i.test(platform)
       self.is_windows_xp = /windows nt 5\.1/i.test(ua)
