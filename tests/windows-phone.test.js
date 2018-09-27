@@ -14,6 +14,4 @@ import cycleAgentsTest from './src/cycle-agents-test'
 // Tests
 // ----------------------------------------
 
-cycleAgentsTest('is_edge', 'Should be Microsoft Edge', 'Should be NOT Microsoft Edge', [
-  'is_windows_phone', 'is_edge_ios', 'is_edge_android'
-])
+cycleAgentsTest('is_windows_phone', 'Should be Windows Phone', 'Should be NOT Windows Phone', ['is_edge'])
