@@ -19,8 +19,9 @@ import agents from './browsers-agents'
  * @param {string} testKey
  * @param {string} shouldBeText
  * @param {string} shouldBeNotText
+ * @param {string[]} [canBe=[]]
  */
-function cycleAgentsTest (testKey, shouldBeText, shouldBeNotText) {
+function cycleAgentsTest (testKey, shouldBeText, shouldBeNotText, canBe = []) {
   if (shouldBeText) {
     agents[testKey].forEach(agent => {
       it(`${testKey} - ${shouldBeText}`, () => {
@@ -33,7 +34,7 @@ function cycleAgentsTest (testKey, shouldBeText, shouldBeNotText) {
 
   if (shouldBeNotText) {
     for (let key in agents) {
-      if (key === testKey) {
+      if (key === testKey || (canBe.length && ~canBe.indexOf(key))) {
         continue
       }
       agents[key].forEach(agent => {

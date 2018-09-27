@@ -1,6 +1,6 @@
 {
   "name": "browserizr",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Browserizr is tiny library, that detects your browser and platform, with testing window.navigator.userAgent and window.navigator.platform.",
   "main": "index.js",
   "scripts": {
