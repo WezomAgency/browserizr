@@ -107,6 +107,8 @@ var Browserizr = (function () {
       self.is_windows8 = /windows nt 6\.[2|3]/i.test(ua)
       self.is_windows10 = /windows nt 10/i.test(ua)
 
+      self.is_linux = /^Linux/i.test(platform)
+
       self.is_mobile = self.is_ios || self.is_android || self.is_edge_android || self.is_edge_ios || self.is_windows_phone || self.is_blackberry || self.is_blackberry10
       self.is_desktop = !self.is_mobile
     },
