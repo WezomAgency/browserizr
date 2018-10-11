@@ -106,6 +106,8 @@ const Browserizr = {
     self.is_windows8 = /windows nt 6\.[2|3]/i.test(ua)
     self.is_windows10 = /windows nt 10/i.test(ua)
 
+    self.is_linux = /^Linux/i.test(platform)
+
     self.is_mobile = (
       self.is_ios ||
       self.is_android ||
