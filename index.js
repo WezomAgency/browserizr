@@ -67,9 +67,9 @@ const Browserizr = {
     self.is_redmi_phone = /Android\s.*Redmi\s/i.test(ua)
     self.is_redminote_phone = /Android\s.*Redmi.*\sNote\s/i.test(ua)
 
-    self.is_ipad = /iPad/i.test(platform)
-    self.is_ipod = /iPod/i.test(platform)
-    self.is_iphone = /iPhone/i.test(platform)
+    self.is_ipad = /iPad/i.test(ua)
+    self.is_ipod = /iPod/i.test(ua)
+    self.is_iphone = /iPhone/i.test(ua)
     self.is_iphone4 = self.is_iphone && width === 320 && height === 480
     self.is_iphone5 = self.is_iphone && width === 320 && height === 568
     self.is_iphone678 = self.is_iphone && width === 375 && height === 667
