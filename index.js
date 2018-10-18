@@ -2,8 +2,9 @@
 
 /**
  * @module
- * @version 2.0.0
+ * @version 2.1.1
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
+ * @see {@link https://wezomagency.github.io/browserizr/}
  * @licence MIT
  */
 
