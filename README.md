@@ -2,6 +2,8 @@
 
 [![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dutchenkoOleg/node-w3c-validator/blob/master/LICENSE)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm](https://img.shields.io/badge/npm-install-orange.svg)](https://www.npmjs.com/package/browserizr)
+[![WezomAgency](https://img.shields.io/badge/wezom-agency-red.svg)](https://github.com/WezomAgency)
 [![Build Status](https://travis-ci.org/WezomAgency/browserizr.svg?branch=master)](https://travis-ci.org/WezomAgency/browserizr)
 
 > **Browserizr** is tiny library, that detects your browser and platform,  
