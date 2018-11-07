@@ -3,172 +3,352 @@ var Browserizr = (function () {
 
   /**
    * @module
-   * @version 2.1.1
+   * @version 3.0.0
    * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
    * @see {@link https://wezomagency.github.io/browserizr/}
    * @licence MIT
    */
 
-  // ----------------------------------------
-  // Private
-  // ----------------------------------------
-
-  var _w = window.screen.width
-  var _h = window.screen.height
-  if (_w > _h) {
-    var _t = _h
-    _h = _w
-    _w = _t
-  }
+  /* eslint-disable no-return-assign */
 
   // ----------------------------------------
   // Public
   // ----------------------------------------
 
-  /**
-   * @namespace
-   * @public
-   */
-  var Browserizr = {
-    /**
-     * @type {number}
-     */
-    width: _w,
+  var Browserizr = (function (window, navigator, screen) {
+    var ua = navigator.userAgent
+    var platform = navigator.userAgent
+    var width = screen.width
+    var height = screen.height
+    if (width > height) {
+      var temp = height
+      height = width
+      width = temp
+    }
 
     /**
-     * @type {number}
+     * @constructor
      */
-    height: _h,
+    function Browserizr () {}
 
-    /**
-     * @type {string}
-     */
-    userAgent: window.navigator.userAgent,
+    var isAndroid = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid = function () {
+      return isAndroid === null ? isAndroid = /android/i.test(ua) : isAndroid
+    }
 
-    /**
-     * @type {string}
-     */
-    platform: window.navigator.platform,
+    var isAndroid3 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid3 = function () {
+      return isAndroid3 === null ? isAndroid3 = /android 3/i.test(ua) : isAndroid3
+    }
 
-    detect: function detect () {
-      var ua = this.userAgent
-      var platform = this.platform
-      var width = this.width
-      var height = this.height
-      var self = this
+    var isAndroid4 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid4 = function () {
+      return isAndroid4 === null ? isAndroid4 = /android 4/i.test(ua) : isAndroid4
+    }
 
-      self.is_android = /android/i.test(ua)
-      self.is_android3 = /android 3\./i.test(ua)
-      self.is_android4 = /android 4\./i.test(ua)
-      self.is_android5 = /android 5\./i.test(ua)
-      self.is_android6 = /android 6\./i.test(ua)
-      self.is_android7 = /android 7\./i.test(ua)
-      self.is_android8 = /android 8\./i.test(ua)
-      self.is_meizu_phone = /Android\s.*MZ(-)?/i.test(ua)
-      self.is_meizunote_phone = /Android\s.*MZ(-)?.*\snote\s/i.test(ua)
-      self.is_redmi_phone = /Android\s.*Redmi\s/i.test(ua)
-      self.is_redminote_phone = /Android\s.*Redmi.*\sNote\s/i.test(ua)
+    var isAndroid5 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid5 = function () {
+      return isAndroid5 === null ? isAndroid5 = /android 5/i.test(ua) : isAndroid5
+    }
 
-      self.is_ipad = /iPad/i.test(ua)
-      self.is_ipod = /iPod/i.test(ua)
-      self.is_iphone = /iPhone/i.test(ua)
-      self.is_iphone4 = self.is_iphone && width === 320 && height === 480
-      self.is_iphone5 = self.is_iphone && width === 320 && height === 568
-      self.is_iphone678 = self.is_iphone && width === 375 && height === 667
-      self.is_iphone678plus = self.is_iphone && width === 414 && height === 736
-      self.is_iphonex = self.is_iphone && width === 375 && height === 812
-      self.is_ios = self.is_ipad || self.is_ipod || self.is_iphone
+    var isAndroid6 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid6 = function () {
+      return isAndroid6 === null ? isAndroid6 = /android 6/i.test(ua) : isAndroid6
+    }
 
-      self.is_mac = /Mac/.test(platform)
-      self.is_maclike = self.is_mac || self.is_ios
+    var isAndroid7 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid7 = function () {
+      return isAndroid7 === null ? isAndroid7 = /android 7/i.test(ua) : isAndroid7
+    }
 
-      self.is_blackberry = /BlackBerry/i.test(ua)
-      self.is_blackberry10 = /BB10;/i.test(ua)
+    var isAndroid8 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isAndroid8 = function () {
+      return isAndroid8 === null ? isAndroid8 = /android 8/i.test(ua) : isAndroid8
+    }
 
-      self.is_moz = / Firefox\//i.test(ua)
-      self.is_opera = /Opera|OPR\//i.test(ua)
-      self.is_safari = / Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua)
-      self.is_chrome = / Chrome\/\d/i.test(ua) && !self.is_opera && !self.is_safari && !/ Edg[e|A|i]\/\d/i.test(ua)
+    var isMeizuPhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isMeizuPhone = function () {
+      return isMeizuPhone === null ? isMeizuPhone = /Android\s.*MZ(-)?/i.test(ua) : isMeizuPhone
+    }
 
-      self.is_ie = /(MSIE|Trident)/i.test(ua)
-      self.is_ie8 = /MSIE 8\.\d/i.test(ua)
-      self.is_ie9 = /MSIE 9\.\d/i.test(ua)
-      self.is_ie10 = /MSIE 10\.\d/i.test(ua)
-      self.is_ie11 = /Trident.*rv[ :]*11\./.test(ua)
+    var isMeizuNotePhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isMeizuNotePhone = function () {
+      return isMeizuNotePhone === null ? isMeizuNotePhone = /Android\s.*MZ(-)?.*\snote\s/i.test(ua) : isMeizuNotePhone
+    }
 
-      self.is_edge = / Edge\/\d/i.test(ua)
-      self.is_edge_android = /\sEdgA\//i.test(ua)
-      self.is_edge_ios = /\sEdgiOS\//i.test(ua)
-      self.is_windows_phone = /Windows\sPhone/i.test(ua)
+    var isRedmiPhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isRedmiPhone = function () {
+      return isRedmiPhone === null ? isRedmiPhone = /Android\s.*Redmi\s/i.test(ua) : isRedmiPhone
+    }
 
-      self.is_windows = /^win/i.test(platform)
-      self.is_windows_xp = /windows nt 5\.1/i.test(ua)
-      self.is_windows_vista = /windows nt 6\.0/i.test(ua)
-      self.is_windows7 = /windows nt 6\.1/i.test(ua)
-      self.is_windows8 = /windows nt 6\.[2|3]/i.test(ua)
-      self.is_windows10 = /windows nt 10/i.test(ua)
+    var isRedmiNotePhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isRedmiNotePhone = function () {
+      return isRedmiNotePhone === null ? isRedmiNotePhone = /Android\s.*Redmi.*\sNote\s/i.test(ua) : isRedmiNotePhone
+    }
 
-      self.is_linux = /^Linux/i.test(platform)
+    var isIPad = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIPad = function () {
+      return isIPad === null ? isIPad = /iPad/i.test(ua) : isIPad
+    }
 
-      self.is_mobile = self.is_ios || self.is_android || self.is_edge_android || self.is_edge_ios || self.is_windows_phone || self.is_blackberry || self.is_blackberry10
-      self.is_desktop = !self.is_mobile
-    },
+    var isIPod = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIPod = function () {
+      return isIPod === null ? isIPod = /iPod/i.test(ua) : isIPod
+    }
 
-    /**
-     * @return {string[]} - array of all positive detects
-     */
-    detected: function detected () {
-      var results = []
-      for (var key in this) {
-        if (/^is_/.test(key) && this[key]) {
-          results.push(key)
-        }
+    var isIPhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhone = function () {
+      return isIPhone === null ? isIPhone = /iPhone/i.test(ua) : isIPhone
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhone4 = function () {
+      return this.isIPhone() && width === 320 && height === 480
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhone5 = function () {
+      return this.isIPhone() && width === 320 && height === 568
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhone678 = function () {
+      return this.isIPhone() && width === 375 && height === 667
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhone678plus = function () {
+      return this.isIPhone() && width === 414 && height === 736
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIPhoneX = function () {
+      return this.isIPhone() && width === 375 && height === 812
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isIOS = function () {
+      return this.isIPad() || this.isIPod() || this.isIPhone()
+    }
+
+    var isMac = null
+    /** @return {boolean} */
+    Browserizr.prototype.isMac = function () {
+      return isMac === null ? isMac = /Mac/.test(platform) : isMac
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isMacLike = function () {
+      return this.isMac() || this.isIOS()
+    }
+
+    var isBlackBerry = null
+    /** @return {boolean} */
+    Browserizr.prototype.isBlackBerry = function () {
+      return isBlackBerry === null ? isBlackBerry = /BlackBerry/i.test(ua) : isBlackBerry
+    }
+
+    var isBlackBerry10 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isBlackBerry10 = function () {
+      return isBlackBerry10 === null ? isBlackBerry10 = /BB10;/i.test(ua) : isBlackBerry10
+    }
+
+    var isMoz = null
+    /** @return {boolean} */
+    Browserizr.prototype.isMoz = function () {
+      return isMoz === null ? isMoz = / Firefox\//i.test(ua) : isMoz
+    }
+
+    var isOpera = null
+    /** @return {boolean} */
+    Browserizr.prototype.isOpera = function () {
+      return isOpera === null ? isOpera = /Opera|OPR\//i.test(ua) : isOpera
+    }
+
+    var isSafari = null
+    /** @return {boolean} */
+    Browserizr.prototype.isSafari = function () {
+      return isSafari === null ? isSafari = / Safari\/\d/.test(ua) && !/ Chrome\/\d/.test(ua) : isSafari
+    }
+
+    var isChrome = null
+    /** @return {boolean} */
+    Browserizr.prototype.isChrome = function () {
+      if (isChrome === null) {
+        isChrome = / Chrome\/\d/i.test(ua) && !(this.isOpera() || this.isSafari() || this.isEdge() || this.isEdgeIOS() || this.isEdgeAndroid())
       }
-      return results
-    },
+      return isChrome
+    }
+
+    var isIE = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIE = function () {
+      return isIE === null ? isIE = /(MSIE|Trident)/i.test(ua) : isIE
+    }
+
+    var isIE8 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIE8 = function () {
+      return isIE8 === null ? isIE8 = /MSIE 8\.\d/i.test(ua) : isIE8
+    }
+
+    var isIE9 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIE9 = function () {
+      return isIE9 === null ? isIE9 = /MSIE 9\.\d/i.test(ua) : isIE9
+    }
+
+    var isIE10 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIE10 = function () {
+      return isIE10 === null ? isIE10 = /MSIE 10\.\d/i.test(ua) : isIE10
+    }
+
+    var isIE11 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isIE11 = function () {
+      return isIE11 === null ? isIE11 = /Trident.*rv[ :]*11\./.test(ua) : isIE11
+    }
+
+    var isEdge = null
+    /** @return {boolean} */
+    Browserizr.prototype.isEdge = function () {
+      return isEdge === null ? isEdge = / Edge\/\d/i.test(ua) : isEdge
+    }
+
+    var isEdgeIOS = null
+    /** @return {boolean} */
+    Browserizr.prototype.isEdgeIOS = function () {
+      return isEdgeIOS === null ? isEdgeIOS = /\sEdgiOS\//i.test(ua) : isEdgeIOS
+    }
+
+    var isEdgeAndroid = null
+    /** @return {boolean} */
+    Browserizr.prototype.isEdgeAndroid = function () {
+      return isEdgeAndroid === null ? isEdgeAndroid = /\sEdgA\//i.test(ua) : isEdgeAndroid
+    }
+
+    var isWindowsPhone = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindowsPhone = function () {
+      return isWindowsPhone === null ? isWindowsPhone = /Windows\sPhone/i.test(ua) : isWindowsPhone
+    }
+
+    var isWindows = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindows = function () {
+      return isWindows === null ? isWindows = /^win/i.test(platform) : isWindows
+    }
+
+    var isWindowsXP = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindowsXP = function () {
+      return isWindowsXP === null ? isWindowsXP = /windows nt 5\.1/i.test(ua) : isWindowsXP
+    }
+
+    var isWindowsVista = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindowsVista = function () {
+      return isWindowsVista === null ? isWindowsVista = /windows nt 6\.0/i.test(ua) : isWindowsVista
+    }
+
+    var isWindows7 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindows7 = function () {
+      return isWindows7 === null ? isWindows7 = /windows nt 6\.1/i.test(ua) : isWindows7
+    }
+
+    var isWindows8 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindows8 = function () {
+      return isWindows8 === null ? isWindows8 = /windows nt 6\.[2|3]/i.test(ua) : isWindows8
+    }
+
+    var isWindows10 = null
+    /** @return {boolean} */
+    Browserizr.prototype.isWindows10 = function () {
+      return isWindows10 === null ? isWindows10 = /windows nt 10/i.test(ua) : isWindows10
+    }
+
+    var isLinux = null
+    /** @return {boolean} */
+    Browserizr.prototype.isLinux = function () {
+      return isLinux === null ? isLinux = /^linux/i.test(platform) : isLinux
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isMobile = function () {
+      return this.isIOS() || this.isAndroid() || this.isEdgeIOS() || this.isEdgeAndroid() || this.isWindowsPhone() || this.isBlackBerry() || this.isBlackBerry10()
+    }
+
+    /** @return {boolean} */
+    Browserizr.prototype.isDesktop = function () {
+      return !this.isMobile()
+    }
 
     /**
      * @param {string[]} tests
      * @param {string} [classPrefix=""]
-     * @param {HTMLElement} [element=document.documentElement]
+     * @param {boolean} [toString=true]
+     * @return {string|string[]}
      */
-    addClasses: function addClasses (tests, classPrefix, element) {
+    Browserizr.prototype.cssClasses = function (tests, classPrefix, toString) {
       classPrefix = classPrefix || ''
-      element = element || document.documentElement
+      toString = toString === undefined ? true : toString
       var classes = []
 
       for (var i = 0; i < tests.length; i++) {
         var key = tests[i]
-        if (/^is_/.test(key)) {
-          var result = this[key]
-          var prefix = result ? 'is' : 'is-not'
-          var cssClass = classPrefix + key.replace(/_/, '-').replace(/^is/, prefix)
-          classes.push(cssClass.toLowerCase())
+        var method = 'is' + key
+        if (this.hasOwnProperty(method)) {
+          var result = this[method]()
+          var prefix = result ? 'is-' : 'is-not-'
+          classes.push(classPrefix + prefix + key.toLowerCase())
+        } else {
+          console.warn('Browserizr has no the test "' + method + '()"')
         }
       }
 
-      if (element.jquery) {
-        element.addClass(classes.join(' '))
-      } else if (element.length) {
-        for (var _i = 0; _i < element.length; _i++) {
-          add(element[_i])
-        }
-      } else {
-        add(element)
+      if (toString) {
+        return classes.join(' ')
       }
+      return classes
+    }
 
-      /**
-       * @param {HTMLElement} el
-       */
-      function add (el) {
-        for (var _i2 = 0; _i2 < classes.length; _i2++) {
-          el.classList.add(classes[_i2])
-        }
+    /**
+     * @private
+     * @type {null|Browserizr}
+     */
+    Browserizr.instance = null
+
+    /**
+     * @static
+     * @public
+     * @return {Browserizr}
+     */
+    Browserizr.detect = function () {
+      if (Browserizr.instance instanceof Browserizr) {
+        return Browserizr.instance
       }
     }
-  }
 
-  Browserizr.detect()
+    return Browserizr
+  }(window, window.navigator, window.screen))
 
   return Browserizr
 }())
