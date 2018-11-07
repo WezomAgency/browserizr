@@ -52,18 +52,22 @@
 	<script src="./dist/browserizr.js"></script>
 	<script>
 	    (function (Browserizr) {
-          var detected = window.Browserizr.detected();
+          var browser = window.Browserizr.detect();
           var detectedResults = [];
-          for (var i = 0; i < detected.length; i++) {
-            detectedResults.push('<li><code class="show-code">' + detected[i] + '</code></li>');
+          for (var test in browser) {
+          	if (
+          	  /^is/.test(test) &&
+          	  browser[test]()
+          	) {
+              detectedResults.push(test.replace(/^is/, ''));
+          	}
           }
 
-          document.getElementById('browserizr-check').innerHTML = detectedResults.join('\n');
-          document.getElementById('browserizr-userAgent').innerHTML = window.Browserizr.userAgent;
-          document.getElementById('browserizr-platform').innerHTML = window.Browserizr.platform;
-
-
-          window.Browserizr.addClasses(['is_mobile'])
+          document.getElementById('browserizr-check').innerHTML = detectedResults.map(function(result) {
+          	return '<li><code class="show-code">' + result + '</code></li>'
+          }).join('\n');
+          document.getElementById('browserizr-userAgent').innerHTML = window.navigator.userAgent;
+          document.getElementById('browserizr-platform').innerHTML = window.navigator.platform;
 	    })(window.Browserizr);
 	</script>
 </body>

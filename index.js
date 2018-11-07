@@ -325,13 +325,12 @@ const Browserizr = (function (window, navigator, screen) {
    */
   Browserizr.prototype.cssClasses = function (tests, classPrefix) {
     classPrefix = classPrefix || ''
-    toString = toString === undefined ? true : toString
     const classes = []
 
     for (let i = 0; i < tests.length; i++) {
       const key = tests[i]
       const method = 'is' + key
-      if (this.hasOwnProperty(method)) {
+      if (this[method] !== undefined) {
         const result = this[method]()
         const prefix = result ? 'is-' : 'is-not-'
         classes.push(classPrefix + prefix + key.toLowerCase())
@@ -358,6 +357,8 @@ const Browserizr = (function (window, navigator, screen) {
     if (Browserizr.instance instanceof Browserizr) {
       return Browserizr.instance
     }
+    Browserizr.instance = new Browserizr()
+    return Browserizr.instance
   }
 
   return Browserizr
