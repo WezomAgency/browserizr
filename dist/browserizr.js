@@ -305,17 +305,16 @@ var Browserizr = (function () {
      * @param {string[]} tests
      * @param {string} [classPrefix=""]
      * @param {boolean} [toString=true]
-     * @return {string|string[]}
+     * @return {string[]}
      */
-    Browserizr.prototype.cssClasses = function (tests, classPrefix, toString) {
+    Browserizr.prototype.cssClasses = function (tests, classPrefix) {
       classPrefix = classPrefix || ''
-      toString = toString === undefined ? true : toString
       var classes = []
 
       for (var i = 0; i < tests.length; i++) {
         var key = tests[i]
         var method = 'is' + key
-        if (this.hasOwnProperty(method)) {
+        if (this[method] !== undefined) {
           var result = this[method]()
           var prefix = result ? 'is-' : 'is-not-'
           classes.push(classPrefix + prefix + key.toLowerCase())
@@ -324,9 +323,6 @@ var Browserizr = (function () {
         }
       }
 
-      if (toString) {
-        return classes.join(' ')
-      }
       return classes
     }
 
@@ -345,6 +341,8 @@ var Browserizr = (function () {
       if (Browserizr.instance instanceof Browserizr) {
         return Browserizr.instance
       }
+      Browserizr.instance = new Browserizr()
+      return Browserizr.instance
     }
 
     return Browserizr
