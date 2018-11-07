@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm test && npm run dist && npm run eslint-dist",
     "test": "npm run eslint && npm run jest",
-    "jest": "Echo no jest",
+    "jest": "echo \"no jest\"",
     "dist": "npm run rollup && npm run uglify && npm run eslint-dist",
     "rollup": "rollup -c",
     "uglify": "uglifyjs -cmo dist/browserizr.min.js -- dist/browserizr.js",
