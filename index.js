@@ -2,7 +2,7 @@
 
 /**
  * @module
- * @version 3.0.0
+ * @version 3.1.0
  * @author Oleg Dutchenko <dutchenko.o.dev@gmail.com>
  * @see {@link https://wezomagency.github.io/browserizr/}
  * @licence MIT
@@ -342,23 +342,14 @@ const Browserizr = (function (window, navigator, screen) {
     return classes
   }
 
-  /**
-   * @private
-   * @type {null|Browserizr}
-   */
-  Browserizr.instance = null
-
+  let instance = null
   /**
    * @static
    * @public
    * @return {Browserizr}
    */
   Browserizr.detect = function () {
-    if (Browserizr.instance instanceof Browserizr) {
-      return Browserizr.instance
-    }
-    Browserizr.instance = new Browserizr()
-    return Browserizr.instance
+    return instance === null ? (instance = new Browserizr()) : instance
   }
 
   return Browserizr
