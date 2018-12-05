@@ -17,7 +17,7 @@ var Browserizr = (function () {
 
   var Browserizr = (function (window, navigator, screen) {
     var ua = navigator.userAgent
-    var platform = navigator.userAgent
+    var platform = navigator.platform
     var width = screen.width
     var height = screen.height
     if (width > height) {

@@ -16,7 +16,7 @@
 
 const Browserizr = (function (window, navigator, screen) {
   let ua = navigator.userAgent
-  let platform = navigator.userAgent
+  let platform = navigator.platform
   let width = screen.width
   let height = screen.height
   if (width > height) {
