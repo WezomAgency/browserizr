@@ -199,7 +199,7 @@ _default value_: `'is-not-'`
 ```js
 Browserizr.detect().cssClasses(['Android']) // => 'is-not-android' <- default prefix
 
-Browserizr.prefixIs = 'no-'; // set empty
+Browserizr.prefixIs = 'no-'; // set custom
 Browserizr.detect().cssClasses(['Android']) // => 'no-android'
 
 Browserizr.prefixIs = 'that-is-not-my-'; // ;)
