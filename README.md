@@ -30,6 +30,9 @@ https://wezomagency.github.io/browserizr/
 - [API](#api)
 	- [List of built-in tests](#list-of-built-in-tests)
 	- [Generate css classes](#generate-css-classes)
+	- [Change prefixes](#change-prefixes)
+		- [Browserizr.prefixIs](#browserizrprefixis)
+		- [Browserizr.prefixIsNot](#browserizrprefixisnot)
 
 ---
 
