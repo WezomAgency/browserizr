@@ -63,6 +63,9 @@
           	}
           }
 
+          console.log(Browserizr.prefixIs);
+          console.log(Browserizr.detect());
+
           document.getElementById('browserizr-check').innerHTML = detectedResults.map(function(result) {
           	return '<li><code class="show-code">' + result + '</code></li>'
           }).join('\n');
