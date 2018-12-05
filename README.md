@@ -18,6 +18,21 @@ https://wezomagency.github.io/browserizr/
 
 ---
 
+***Table of contents***
+
+- [Install](#install)
+	- [NPM](#npm)
+	- [CDN](#cdn-unpkgcom)
+	- [Download](#download)
+	- [include as module](#include-as-module)
+	- [include as external file](#include-as-external-file)
+- [Previous versions](#previous-versions)
+- [API](#api)
+	- [List of built-in tests](#list-of-built-in-tests)
+	- [Generate css classes](#generate-css-classes)
+
+---
+
 ## Install
 
 ### NPM
@@ -55,7 +70,7 @@ import Browserizr from 'browserizr'
 
 ---
 
-## Prev versions
+## Previous versions
 
 > _please read:_
 
@@ -157,5 +172,35 @@ const classes = Browserizr.detect().cssClasses(['Mobile', 'Desktop'], 'browseriz
 // => ['browserizr-is-mobile', 'browserizr-is-not-desktop'] => if mobile device
 // => ['browserizr-is-not-mobile', 'browserizr-is-desktop'] => if desktop
 ```
+
+### Change prefixes
+
+#### `Browserizr.prefixIs`
+
+_default value_: `'is-'`
+
+```js
+Browserizr.detect().cssClasses(['Android']) // => 'is-android' <- default prefix
+
+Browserizr.prefixIs = ''; // set empty
+Browserizr.detect().cssClasses(['Android']) // => 'android'
+
+Browserizr.prefixIs = 'that-is-my-'; // ;)
+Browserizr.detect().cssClasses(['Android']) // => 'that-is-my-android'
+``` 
+
+#### `Browserizr.prefixIsNot`
+
+_default value_: `'is-not-'`
+
+```js
+Browserizr.detect().cssClasses(['Android']) // => 'is-not-android' <- default prefix
+
+Browserizr.prefixIs = 'no-'; // set empty
+Browserizr.detect().cssClasses(['Android']) // => 'no-android'
+
+Browserizr.prefixIs = 'that-is-not-my-'; // ;)
+Browserizr.detect().cssClasses(['Android']) // => 'that-is-not-my-android'
+``` 
 
 ---

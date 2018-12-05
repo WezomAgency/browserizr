@@ -316,7 +316,7 @@ var Browserizr = (function () {
         var method = 'is' + key
         if (this[method] !== undefined) {
           var result = this[method]()
-          var prefix = result ? 'is-' : 'is-not-'
+          var prefix = result ? prefixIs : prefixIsNot
           classes.push(classPrefix + prefix + key.toLowerCase())
         } else {
           console.warn('Browserizr has no the test "' + method + '()"')
@@ -327,16 +327,47 @@ var Browserizr = (function () {
     }
 
     var instance = null
-    /**
-     * @static
-     * @public
-     * @return {Browserizr}
-     */
-    Browserizr.detect = function () {
-      return instance === null ? instance = new Browserizr() : instance
-    }
+    var prefixIs = 'is-'
+    var prefixIsNot = 'is-not-'
 
-    return Browserizr
+    return {
+      /**
+       * @static
+       * @public
+       * @return {Browserizr}
+       */
+      detect: function detect () {
+        return instance === null ? instance = new Browserizr() : instance
+      },
+
+      /**
+       * @type string
+       */
+      get prefixIs () {
+        return prefixIs
+      },
+
+      /**
+       * @type string
+       */
+      set prefixIs (value) {
+        prefixIs = value
+      },
+
+      /**
+       * @type string
+       */
+      get prefixIsNot () {
+        return prefixIsNot
+      },
+
+      /**
+       * @type string
+       */
+      set prefixIsNot (value) {
+        prefixIsNot = value
+      }
+    }
   }(window, window.navigator, window.screen))
 
   return Browserizr
