@@ -115,7 +115,7 @@ Browserizr has detects test for:
 1. `Browserizr.detect().isIPhone5()`
 1. `Browserizr.detect().isIPhone678()` - _iPhone 6/7/8_
 1. `Browserizr.detect().isIPhone678plus()` - _iPhone 6/7/8 plus_
-1. `Browserizr.detect().isIPhonex()`
+1. `Browserizr.detect().isIPhoneX()`
 1. `Browserizr.detect().isLinux()`
 1. `Browserizr.detect().isMac()`
 1. `Browserizr.detect().isMacLike()`
