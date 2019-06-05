@@ -12,6 +12,7 @@ atlassian-ide-plugin.xml
 .npm/
 node_modules/
 *.log*
+package-lock.json
 
 # fs
 .DS_Store
