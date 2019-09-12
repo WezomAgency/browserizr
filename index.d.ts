@@ -45,7 +45,7 @@ declare interface Browserizr {
 	isLinux (): boolean;
 	isMobile (): boolean;
 	isDesktop (): boolean;
-	cssClasses (tests: string, classPrefix: string = ''): string[];
+	cssClasses (tests: string[], classPrefix: string = ''): string[];
 }
 
 declare const BrowserizrNS = {
