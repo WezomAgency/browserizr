@@ -1,7 +1,7 @@
 {
   "name": "browserizr",
-  "version": "3.2.5",
-  "description": "Browserizr is tiny library, that detects your browser and platform, with testing window.navigator.userAgent and window.navigator.platform.",
+  "version": "4.0.0",
+  "description": "This project is deprecated and do not maintained anymore. Use @wezom/browserizr instead",
   "main": "index.js",
   "scripts": {
     "build": "npm test && npm run dist && npm run eslint-dist",
